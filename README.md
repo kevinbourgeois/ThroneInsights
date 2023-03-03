@@ -1,5 +1,7 @@
 # ThroneInsights
 
+![Photo illustrative de GoT](/illustration.jpg)
+_Source de l'image : Prime Video_
 
 ## Contexte
 Les données proviennent du site Kaggle. Le créateur se nomme Sourav Banerjee. Le contexte d’utilisation de ce jeu de données va permettre d’expliquer la tendance du nombre de téléspectateurs à la première diffusion de chaque épisode de la série Game of Thrones.
