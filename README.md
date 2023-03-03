@@ -7,7 +7,7 @@ Les données proviennent du site Kaggle. Le créateur se nomme Sourav Banerjee. 
 **Le jeu de données est contenu dans un fichier .csv**
 
 - Saison  
- * Entier numérique 1-8
+  - Entier numérique 1-8
 - No de l’épisode (saison)
  -	Entier numérique 1-10
 -	No épisode (général)
