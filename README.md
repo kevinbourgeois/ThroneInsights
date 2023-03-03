@@ -17,7 +17,7 @@ Game of Thrones est une série télévisée de fantasy médiévale basée sur le
 - No de l’épisode (saison)
   - Entier numérique 1-10
 -	No épisode (général)
-  - Entier numérique 1-73
+  -	Entier numérique 1-73
 -	Titre de l’épisode
   - Chaine de caractère
 -	Durée de l’épisode
