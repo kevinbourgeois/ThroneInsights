@@ -1,10 +1,12 @@
 # ThroneInsights
 
-Contexte
-Les données proviennent du site Kaggle. Le créateur se nomme Sourav Banerjee. Le contexte d’utilisation de ce jeu de données va permettre d’expliquer la tendance du nombre de téléspectateurs à la première diffusion de chaque épisode de la série Game of Thrones. 
-Description
-•	Saison 
-o	Entier numérique 1-8
+## Contexte
+Les données proviennent du site Kaggle. Le créateur se nomme Sourav Banerjee. Le contexte d’utilisation de ce jeu de données va permettre d’expliquer la tendance du nombre de téléspectateurs à la première diffusion de chaque épisode de la série Game of Thrones.
+
+## Description
+
+1. Saison  
+* Entier numérique 1-8
 •	No de l’épisode (saison)
 o	Entier numérique 1-10
 •	No épisode (général)
@@ -42,10 +44,12 @@ o	Chaîne de caractère
 •	Synopsis
 o	Chaîne de caractère
 Le jeu de données est contenu dans un fichier .csv
-But
+## But
+
 Nous voulons expliquer pourquoi la tendance de visionnage de plusieurs épisodes subissent des piques ou des chutes importantes de téléspectateurs en analysant les événements clés de l’épisode en question.
  À l’aide du résumé et de notre propre visionnage des épisodes, nous allons exposer les raisons qui pousseraient à démotiver les téléspectateurs, ou, au contraire, attiser l’envie de regarder la suite avec enthousiasme.  
 Références
+==
 •	HASIB AL MUZDADID | https://www.kaggle.com/code/hasibalmuzdadid/game-of-thrones-analysis
 o	Les données ont été utilisé dans le but de monter : les saisons les mieux notées, la durée des épisodes à travers les saisons, le taux d’adapation des romans par saison, et bien d’autres choses encore.
 •	ASHISH MOTWANI | https://www.kaggle.com/code/ashishmotwani/got-best-season-eda
