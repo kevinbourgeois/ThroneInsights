@@ -12,43 +12,43 @@ Game of Thrones est une série télévisée de fantasy médiévale basée sur le
 ## Description
 **Le jeu de données est contenu dans un fichier .csv**
 
-- Saison  
+- Saison 
   - Entier numérique 1-8
 - No de l’épisode (saison)
   - Entier numérique 1-10
--	No épisode (général)
+- No épisode (général)
   - Entier numérique 1-73
--	Titre de l’épisode
+- Titre de l’épisode
   - Chaine de caractère
--	Durée de l’épisode
+- Durée de l’épisode
   - Entier numérique
--	Directeur artistique
- -	Chaîne de caractère
--	Producteur exécutif 
+- Directeur artistique
   - Chaîne de caractère
--	Date de diffusion de l’épisode
+- Producteur exécutif 
+  - Chaîne de caractère
+- Date de diffusion de l’épisode
   - JJ/MM/AAAA
--	Nombre de téléspectateurs en million (USA)
+- Nombre de téléspectateurs en million (USA)
   - Numérique décimal
--	Producteur musical	
+- Producteur musical	
   - Chaîne de caractère
--	Directeur cinématographique
+- Directeur cinématographique
   - Chaîne de caractère
--	Montage
+- Montage
   - Chaîne de caractère
--	Note attribuée par IMDB
+- Note attribuée par IMDB
   - Numérique décimal 0-10
--	Note attribuée par RottenTomato
+- Note attribuée par RottenTomato
   - Entier numérique 0-100 
--	Note attribuée par Metacritic
+- Note attribuée par Metacritic
   - Numérique décimal 0-10
--	Date de commande de l’épisode
+- Date de commande de l’épisode
   - JJ/MM/AAAA
--	Durée de production de l’épisode
+- Durée de production de l’épisode
   - Chaîne de production
--	Roman adapté
+- Roman adapté
   - Chaîne de caractère
--	Synopsis
+- Synopsis
   - Chaîne de caractère
 
 ## But
