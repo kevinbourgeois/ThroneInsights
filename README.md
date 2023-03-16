@@ -55,6 +55,11 @@ Game of Thrones est une série télévisée de fantasy médiévale basée sur le
 
 Nous voulons expliquer pourquoi la tendance de visionnage de plusieurs épisodes subit des piques ou des chutes importantes de téléspectateurs en analysant les événements clés de l’épisode en question.
  À l’aide du résumé et de notre propre visionnage des épisodes, nous allons exposer les raisons qui pousseraient à démotiver les téléspectateurs, ou, au contraire, attiser l’envie de regarder la suite avec enthousiasme.  
+
+## Maquettes 
+
+Figma : [lien](https://www.figma.com/file/mGcbNS4Ns4LC975HFXWnB0/ThronesInsights?node-id=1%3A2&t=XrfNRj4xteR77gbA-1)
+
 ## Références
 
 -	HASIB AL MUZDADID | [lien](https://www.kaggle.com/code/hasibalmuzdadid/game-of-thrones-analysis)
