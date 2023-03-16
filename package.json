@@ -1,0 +1,30 @@
+{
+  "name": "throneinsights",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kevinbourgeois/ThroneInsights.git"
+  },
+  "author": "Kevin Bourgeois, Glory Masungi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kevinbourgeois/ThroneInsights/issues"
+  },
+  "homepage": "https://github.com/kevinbourgeois/ThroneInsights#readme",
+  "devDependencies": {
+    "parcel": "^2.8.3"
+  },
+  "dependencies": {
+    "d3-axis": "^3.0.0",
+    "d3-fetch": "^3.0.1",
+    "d3-scale": "^4.0.2",
+    "d3-selection": "^3.0.0",
+    "papaparse": "^5.4.0",
+    "parcel-bundler": "^1.12.5"
+  }
+}
