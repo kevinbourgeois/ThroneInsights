@@ -5,10 +5,12 @@ import * as d3 from 'd3'
 
 const templatePopUp = document.querySelector('#template-pop-up')
 
-
+/*
+    Chargement des données tout ce qui suit s'éxécute
+ */
 getData.then(episodes => {
 
-    //Dessin du graph
+    //Dessin de la zone du futur graph
     var svg = select("#graph")
         .append("svg")
         .attr("width", width + margin.left + margin.right)
@@ -17,46 +19,39 @@ getData.then(episodes => {
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
-    //Juste le numéro de tout les épisodes
-    var arrNoEpisode = episodes.map(episode => episode.noEpisodeOverall);
+    //Récupère les données et créé tableau avec le numéro de chaque épisodes
+    const arrNoEpisode = episodes.map(episode => episode.noEpisodeOverall);
 
-    console.log(arrNoEpisode)
-    console.log(['1', '2', '3', '4'])
-    const tab = ['1', '2', '3', '4', '5', '6', '8', '9', '10', '11', '12']
 
-    console.log(d3.extent(tab))
+    // Définition des échelles
 
-    // Echelle
+    //échelle pour l'axe x
     let echelleEpisodes = scaleLinear()
         .domain([1,73])
         .range([0, width])
         .clamp(true)
 
-        //.paddingInner(0.5);
-
+    //échelle pour l'axe y
     var echelleViewers = scaleLinear()
         .domain([0, 15])
         .range([height, 0])
         .clamp(true)
 
 
+    //création des deux l'échelles
     let axeXEpisodes = d3.axisBottom(echelleEpisodes)
-        //.tickFormat(d3.format('d'));
     let axeYViewers = d3.axisLeft(echelleViewers)
 
 
     const g = svg.append('g')
 
-
-    // Set clip region, rect with same width/height as "drawing" area, where we will be able to zoom in
+    //Création de la zone de clip, ce qui va faire que le graph ne sortira pas en passant par dessus le html
     g.append('defs')
         .append('clipPath')
         .attr('id', 'clip')
         .append('rect')
-        //.attr('x', 0-margin.left)
         .attr('x', 0)
         .attr('y', 0)
-        //.attr('y', 0-margin.top)
         .attr('width', width)
         .attr('height', height);
 
@@ -65,24 +60,20 @@ getData.then(episodes => {
         .attr('clip-path', 'url(#clip)');
 
 
+    //Création et des deux axes dans le SVG
+
+    //Axe X
     var xAxis = svg.append("g")
         .attr("transform", "translate(0," + height + ")")
         .attr("class", "x-axis")
         .call(axeXEpisodes);
 
+    //Axe y
     var yAxis = svg.append("g")
         .attr("class", "y-axis")
         .call(axeYViewers);
 
-
-
-
-
-
-
-
-
-
+    //Définition des coordonées des points de la ligne
     var line = d3.line()
         .x(function (d) {
             return echelleEpisodes(d.noEpisodeOverall);
@@ -103,7 +94,7 @@ getData.then(episodes => {
 
 
 
-    //Dessine les points du graph
+    //Dessine les points du graph sur la ligne
     main
         .selectAll("circle")
         .data(episodes)
@@ -115,10 +106,6 @@ getData.then(episodes => {
             .attr("class", "dot")
             .on("mouseover", (e, d) => {
                 const title = d.title
-
-                console.log(echelleViewers(d.noEpisodeOverall))
-                console.log(echelleViewers(d.viewers))
-
 
                 const copyPopUp = templatePopUp.content.cloneNode(true)
 
@@ -139,19 +126,24 @@ getData.then(episodes => {
 
 )
 
+    //Création du zoom
     const zoom = d3.zoom()
         .scaleExtent([1.1, 2])
         .translateExtent([[0, 0], [width+margin.left, height]])
         .on("zoom", zoomed);
 
+    //Ajout du zoom sur la zone du svg
     function initZoom() {
         d3.select('svg')
             .call(zoom);
     }
 
+    /*
+        Fonction appelée à chaque fois que l'user clique, ou fait aller la molette
+     */
     function zoomed(e) {
-        svg.select('.line-graph').attr("transform", e.transform);
-        svg.selectAll('.dot').attr("transform", e.transform);
+        g.select('.line-graph').attr("transform", e.transform);
+        g.selectAll('.dot').attr("transform", e.transform);
 
         // Régénerer un axe à chaque fois qu'on zoom
         let newX = e.transform.rescaleX(echelleEpisodes);
@@ -164,6 +156,7 @@ getData.then(episodes => {
 
     }
 
+    //Ajoute le zoom sur le SVG
     initZoom();
 
 
