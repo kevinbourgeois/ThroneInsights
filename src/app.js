@@ -5,6 +5,7 @@ import * as d3 from 'd3'
 
 const templatePopUp = document.querySelector('#template-pop-up')
 
+
 /*
     Chargement des données tout ce qui suit s'éxécute
  */
@@ -104,8 +105,7 @@ getData.then(episodes => {
             .attr("cy", (d) => echelleViewers(d.viewers))
             .attr("fill", "blue")
             .attr("class", "dot")
-            .on("mouseover", (e, d) => {
-                const title = d.title
+            .on("mouseover", (e, d, i) => {
 
                 const copyPopUp = templatePopUp.content.cloneNode(true)
 
@@ -113,11 +113,30 @@ getData.then(episodes => {
 
                 const popUp = document.querySelector('#pop-up')
 
-                popUp.style.left = e.pageX + "px"
-                popUp.style.top = e.pageY - 200 + "px"
+                popUp.style.left = (e.pageX-70) + "px"
+                popUp.style.top = e.pageY - 300 + "px"
+
+                const varianceViewers = d.viewers - episodes[d.noEpisodeOverall-2].viewers;
+                const divVariance =  document.querySelector('#variance')
+
+
+                let arrowHTML = "";
+                if (varianceViewers > 0) {
+                    arrowHTML = "<span id=arrow-up class=\"material-symbols-outlined\">\n" +
+                                "trending_up\n" +
+                                "</span>"
+                } else {
+                    arrowHTML = "<span id=arrow-down class=\"material-symbols-outlined\">\n" +
+                                "trending_down\n" +
+                                "</span>"
+                }
 
                 //Mets les données dans la popup
-                popUp.querySelector('h2').textContent = title
+                popUp.querySelector('#title').textContent = d.title
+                popUp.querySelector('#synopsis').textContent = (d.synopsis).slice(0, 100) + '...';
+
+                popUp.querySelector('#variance').textContent = Math.abs(varianceViewers.toFixed(2)*1000) + 'k Viewers'
+                divVariance.insertAdjacentHTML("afterbegin", arrowHTML)
 
             })
             .on("mouseout", () => {
@@ -126,10 +145,12 @@ getData.then(episodes => {
 
 )
 
+    //TODO : Faire en sorte que l'on arrive sur une position déjà zoomée po
+
     //Création du zoom
     const zoom = d3.zoom()
         .scaleExtent([1.1, 2])
-        .translateExtent([[0, 0], [width+margin.left, height]])
+        .translateExtent([[0, 0], [width+margin.left+margin.right, height]])
         .on("zoom", zoomed);
 
     //Ajout du zoom sur la zone du svg
@@ -156,6 +177,19 @@ getData.then(episodes => {
 
     }
 
+
+
+    document.querySelector('#s1').addEventListener('click', () => {
+        zooms1()
+    })
+
+    //TODO: Faire en sorte que ça se déplace et ça zoome sur les épisodes de la saison1
+    function zooms1() {
+        d3.select('svg')
+            .transition()
+            .call(zoom.translateTo, 100, 100);
+    }
+
     //Ajoute le zoom sur le SVG
     initZoom();
 
@@ -163,15 +197,11 @@ getData.then(episodes => {
 })
 
 
-
-
-
-
 const margin = {top: 10, right: 40, bottom: 30, left: 40}
 const width = 1400 - margin.left - margin.right;
 
 
 
-const height = 600 - margin.top - margin.bottom;
+const height = 700 - margin.top - margin.bottom;
 
 

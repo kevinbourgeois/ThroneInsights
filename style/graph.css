@@ -1,6 +1,3 @@
-svg g circle:hover {
-    fill: midnightblue;
-}
 circle {
     z-index: 10;
 }
@@ -27,10 +24,27 @@ g {
     width: 13em;
 }
 #pop-up {
-    border: 3px solid black;
-    max-width: 30vw;
+    border: 0.5px solid black;
+    box-shadow: 1px 4px 8px rgba(0, 0, 0, 0.5);
+    background-color: #F7F8FC;
     display: flex;
     flex-direction: column;
     align-items: center;
     position: absolute;
 }
+
+#pop-up #title {
+    padding: 0 20px;
+}
+#pop-up #synopsis {
+    margin: 0 10%;
+}
+
+ .material-symbols-outlined {
+     font-variation-settings: 'FILL' 0,
+     'wght' 400,
+     'GRAD' 0,
+     'opsz' 48
+ }
+
+

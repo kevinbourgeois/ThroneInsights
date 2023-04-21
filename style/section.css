@@ -59,3 +59,8 @@ section {
 #bottom-section {
     background-color: #1F3C4A;
 }
+
+.dot:hover {
+    r: 10px;
+    transition: all 0.5s ease;
+}
