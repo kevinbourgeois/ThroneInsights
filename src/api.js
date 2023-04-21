@@ -22,8 +22,6 @@ const getData = csv(data).then(
 
             dataTrim.push(ep);
 
-
-
         }
 
         return dataTrim;
