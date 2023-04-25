@@ -1,5 +1,6 @@
 import {csv} from "d3-fetch";
 import data from "../ressources/Game_of_Thrones.csv";
+import symbol from "./symbols.js"
 
 const getData = csv(data).then(
     res => {

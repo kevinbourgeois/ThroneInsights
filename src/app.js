@@ -2,9 +2,9 @@ import {getData} from "./api";
 import {select} from "d3-selection";
 import {scaleBand, scaleLinear} from "d3-scale";
 import * as d3 from 'd3'
+import { drawAllSymbols } from "./symbols";
 
 const templatePopUp = document.querySelector('#template-pop-up')
-
 
 /*
     Chargement des données tout ce qui suit s'éxécute
@@ -106,16 +106,17 @@ getData.then(episodes => {
             .attr("fill", "blue")
             .attr("class", "dot")
             .on("mouseover", (e, d, i) => {
-
                 const copyPopUp = templatePopUp.content.cloneNode(true)
 
                 document.querySelector('body').append(copyPopUp)
 
                 const popUp = document.querySelector('#pop-up')
 
-                popUp.style.left = (e.pageX-70) + "px"
-                popUp.style.top = e.pageY - 300 + "px"
 
+                popUp.style.left = (e.pageX-70) + "px"
+                popUp.style.top = e.pageY - 500 + "px"
+
+                if (d.noEpisodeOverall !== '1') {
                 const varianceViewers = d.viewers - episodes[d.noEpisodeOverall-2].viewers;
                 const divVariance =  document.querySelector('#variance')
 
@@ -131,19 +132,29 @@ getData.then(episodes => {
                                 "</span>"
                 }
 
-                //Mets les données dans la popup
-                popUp.querySelector('#title').textContent = d.title
-                popUp.querySelector('#synopsis').textContent = (d.synopsis).slice(0, 100) + '...';
+
 
                 popUp.querySelector('#variance').textContent = Math.abs(varianceViewers.toFixed(2)*1000) + 'k Viewers'
                 divVariance.insertAdjacentHTML("afterbegin", arrowHTML)
-
+                    }
+//Mets les données dans la popup
+                popUp.querySelector('#title').textContent = "S" + d.season + " E " + d.noEpisodeSeason + " " +  d.title
+                popUp.querySelector('#synopsis').textContent = (d.synopsis).slice(0, 100) + '...';
+                popUp.querySelector('#synopsis').textContent = (d.synopsis);
             })
             .on("mouseout", () => {
                 document.getElementById('pop-up').remove()
             })
 
 )
+
+    //récupère la node list tout les éléments avec la class dot et les stock dans une variable
+    const dots = document.querySelectorAll('.dot') 
+
+    drawAllSymbols(dots)
+
+    
+
 
     //TODO : Faire en sorte que l'on arrive sur une position déjà zoomée po
 
@@ -165,6 +176,7 @@ getData.then(episodes => {
     function zoomed(e) {
         g.select('.line-graph').attr("transform", e.transform);
         g.selectAll('.dot').attr("transform", e.transform);
+        g.selectAll('.symbol').attr("transform", e.transform);
 
         // Régénerer un axe à chaque fois qu'on zoom
         let newX = e.transform.rescaleX(echelleEpisodes);
@@ -198,8 +210,7 @@ getData.then(episodes => {
 
 
 const margin = {top: 10, right: 40, bottom: 30, left: 40}
-const width = 1400 - margin.left - margin.right;
-
+const width = 1500 - margin.left - margin.right;
 
 
 const height = 700 - margin.top - margin.bottom;
