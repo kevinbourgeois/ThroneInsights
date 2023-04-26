@@ -40,11 +40,31 @@ g {
     margin: 0 10%;
 }
 
- .material-symbols-outlined {
-     font-variation-settings: 'FILL' 0,
-     'wght' 400,
-     'GRAD' 0,
-     'opsz' 48
- }
+.season-one {
+    fill: aqua;
+}
+.season-two {
+    fill: blue;
+}
+.season-three {
+    fill: green;
+}
+.season-four {
+    fill: yellow;
+}
+.season-five {
+    fill: orange;
+}
+.season-six {
+    fill: red;
+}
+.season-seven {
+    fill: purple;
+}
+.season-eight {
+    fill: pink;
+}
+
+ 
 
 

@@ -22,6 +22,10 @@ const drawAllSymbols = (dots) => {
     addSymbol(dots[getEpisodeNumber(9)], [{
         'symbol': '💀',
         'caption': 'Ned Stark is beheaded'
+    },
+    {
+        'symbol': '⛓️',
+        'caption': 'Jaime is captured by Robb Stark'
     }]);
 
     addSymbol(dots[getEpisodeNumber(10)], [{
@@ -170,6 +174,10 @@ const drawAllSymbols = (dots) => {
     addSymbol(dots[getEpisodeNumber(39)], [{
         'symbol': '⚔️',
         'caption': 'The wildlings attack Castle Black but are repelled'
+    },
+    {
+        'symbol': '💀',
+        'caption': 'Ygritte is killed by Olly'
     }]);
 
     addSymbol(dots[getEpisodeNumber(40)], [{
@@ -179,7 +187,131 @@ const drawAllSymbols = (dots) => {
     {
         'symbol': '⭐',
         'caption': 'Brandon Stark meets the Three-Eyed Raven'
+    },
+    {
+        'symbol': '💀',
+        'caption': 'Tyrion kills Shae and Tywin'
     }]);
+
+    addSymbol(dots[getEpisodeNumber(41)], [{
+        'symbol': '💀',
+        'caption': 'Jon shoots an arrow in the heart of Mance Rayder'
+    }]);
+
+    addSymbol(dots[getEpisodeNumber(42)], [{
+        'symbol': '⭐',
+        'caption': 'Arya becomes No One'
+    },
+    {
+        'symbol': '👑',
+        'caption': 'Jon Snow is named Lord Commander of the Night\'s Watch'
+    }]);
+
+    addSymbol(dots[getEpisodeNumber(44)], [{
+        'symbol': '💀',
+        'caption': 'Ser Baristan Selmy is killed by the Sons of the Harpy'
+    }]);
+    
+    addSymbol(dots[getEpisodeNumber(45)], [{
+        'symbol': '🩸',
+        'caption': 'Jorah Mormont is infected by Greyscale'
+    },
+    {
+        'symbol': '🤝',
+        'caption': 'Jon Snow and the Wildlings make peace'
+    },
+    {
+        'symbol': '❤️',
+        'caption': 'Grey Worm and Missandei fall in love'
+    }]);
+
+    addSymbol(dots[getEpisodeNumber(46)], [{
+        'symbol': '⛓️',
+        'caption': 'Maegeary and Loras are arrested by the Faith Militant'
+    },
+    {
+        'symbol': '💍',
+        'caption': 'Sansa marries Ramsay Bolton'
+    },
+    {
+        'symbol': '🩸',
+        'caption': 'Ramsey rapes Sansa'
+    }]);
+
+    addSymbol(dots[getEpisodeNumber(47)], [{
+        'symbol': '⛓️',
+        'caption': 'Jorah and Tyrion are sold as slaves'
+    },
+    {
+        'symbol': '⛓️',
+        'caption': 'Cersei is arrested by the Faith Militant'
+    }]);
+
+    addSymbol(dots[getEpisodeNumber(48)], [{
+        'symbol': '🤝',
+        'caption': 'Tyrion is named Daenerys\' advisor'
+    },
+    {
+        'symbol': '🧟',
+        'caption': 'White Walkers attack Hardhome'
+    }, 
+    {
+        'symbol': '🧟',
+        'caption': 'Jon Snow kills a White Walker with Longclaw'
+    },
+    {
+        'symbol': '🧟',
+        'caption': 'The Night King raises his arms and turns the dead into White Walkers'
+    }]);
+
+    addSymbol(dots[getEpisodeNumber(49)], [{
+        'symbol': '💀',
+        'caption': 'Shireen is burned alive by Melisandre'
+    },
+    {
+        'symbol': '⚔️',
+        'caption': 'The Sons of Harpy attack the fighting pits'
+    },
+    {
+        'symbol': '🐉',
+        'caption': 'Drogon saves Daenerys from the Sons of Harpy and flies away with her'
+    }]);
+
+    addSymbol(dots[getEpisodeNumber(50)], [{
+        'symbol': '💀',
+        'caption': 'Stannis is killed by Brienne of Tarth after losing the Battle of Winterfell'
+    },
+    {
+        'symbol': '🏃‍♀️',
+        'caption': 'Theon and Sansa escape Winterfell'
+    },
+    {
+        'symbol': '⛓️',
+        'caption': 'Cersei is forced to walk naked through the streets of King\'s Landing'
+    },
+    {
+        'symbol': '⭐',
+        'caption': 'The Mountain gets resurrected by Qyburn'
+    },
+    {
+        'symbol': '💀',
+        'caption': 'Myrcella is poisoned by Ellaria Sand'
+    },
+    {
+        'symbol': '💀',
+        'caption': 'Jon Snow is stabbed to death by the Night\'s Watch'
+    }]);
+
+    addSymbol(dots[getEpisodeNumber(51)], [{
+        'symbol': '⭐',
+        'caption': 'Melissandre reveals her true form'
+    }]);
+
+
+
+
+
+
 
 
 
@@ -234,4 +366,23 @@ const getEpisodeNumber = (noEpisode) => {
     return noEpisode-1;
 }
 
-export {drawAllSymbols};
+const drawSeasonsDots = (dots) => {
+    colorDots(dots, 0, 10, 'season-one');
+    colorDots(dots, 10, 20, 'season-two');
+    colorDots(dots, 20, 30, 'season-three');
+    colorDots(dots, 30, 40, 'season-four');
+    colorDots(dots, 40, 50, 'season-five');
+    colorDots(dots, 50, 60, 'season-six');
+    colorDots(dots, 60, 67, 'season-seven');
+    colorDots(dots, 67, 73, 'season-eight');
+}
+
+const colorDots = (dots, firstEp, LastEp, className) => {
+    for(let i = firstEp; i < (LastEp); i++) {
+        //on ajoute la classe .season-one à chaque point
+        dots[i].classList.add(className);
+    }
+}
+
+
+export {drawAllSymbols, drawSeasonsDots};

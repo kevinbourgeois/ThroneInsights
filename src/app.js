@@ -2,7 +2,7 @@ import {getData} from "./api";
 import {select} from "d3-selection";
 import {scaleBand, scaleLinear} from "d3-scale";
 import * as d3 from 'd3'
-import { drawAllSymbols } from "./symbols";
+import { drawAllSymbols, drawSeasonsDots } from "./symbols";
 
 const templatePopUp = document.querySelector('#template-pop-up')
 
@@ -53,7 +53,7 @@ getData.then(episodes => {
         .append('rect')
         .attr('x', 0)
         .attr('y', 0)
-        .attr('width', width)
+        .attr('width', 1400)
         .attr('height', height);
 
     const main = g.append('g')
@@ -89,8 +89,8 @@ getData.then(episodes => {
         .datum(episodes)
         .attr('d', line)
         .attr('fill', 'none')
-        .attr('stroke', 'blue')
-        .attr('stroke-width', 3)
+        .attr('stroke', 'black')
+        .attr('stroke-width', 2)
         .attr("class", "line-graph")
 
 
@@ -105,6 +105,7 @@ getData.then(episodes => {
             .attr("cy", (d) => echelleViewers(d.viewers))
             .attr("fill", "blue")
             .attr("class", "dot")
+            .attr("stroke", "black")
             .on("mouseover", (e, d, i) => {
                 const copyPopUp = templatePopUp.content.cloneNode(true)
 
@@ -152,6 +153,7 @@ getData.then(episodes => {
     const dots = document.querySelectorAll('.dot') 
 
     drawAllSymbols(dots)
+    drawSeasonsDots(dots)
 
     
 
@@ -210,7 +212,7 @@ getData.then(episodes => {
 
 
 const margin = {top: 10, right: 40, bottom: 30, left: 40}
-const width = 1500 - margin.left - margin.right;
+const width = 1400 - margin.left - margin.right;
 
 
 const height = 700 - margin.top - margin.bottom;
