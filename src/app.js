@@ -5,11 +5,15 @@ import * as d3 from 'd3'
 import { drawAllSymbols, drawSeasonsDots } from "./symbols";
 
 const templatePopUp = document.querySelector('#template-pop-up')
+// Get the modal
+const modal = document.getElementById("myModal");
 
 /*
     Chargement des données tout ce qui suit s'éxécute
  */
 getData.then(episodes => {
+
+    console.log(episodes)
 
     //Dessin de la zone du futur graph
     var svg = select("#graph")
@@ -41,7 +45,8 @@ getData.then(episodes => {
 
     //création des deux l'échelles
     let axeXEpisodes = d3.axisBottom(echelleEpisodes)
-    let axeYViewers = d3.axisLeft(echelleViewers)
+    let axeYViewers = d3.axisLeft(echelleViewers).tickSize(-innerWidth)
+
 
 
     const g = svg.append('g')
@@ -115,7 +120,7 @@ getData.then(episodes => {
 
 
                 popUp.style.left = (e.pageX-70) + "px"
-                popUp.style.top = e.pageY - 500 + "px"
+                popUp.style.top = e.pageY + 10 +  "px"
 
                 if (d.noEpisodeOverall !== '1') {
                 const varianceViewers = d.viewers - episodes[d.noEpisodeOverall-2].viewers;
@@ -140,11 +145,21 @@ getData.then(episodes => {
                     }
 //Mets les données dans la popup
                 popUp.querySelector('#title').textContent = "S" + d.season + " E " + d.noEpisodeSeason + " " +  d.title
-                popUp.querySelector('#synopsis').textContent = (d.synopsis).slice(0, 100) + '...';
-                popUp.querySelector('#synopsis').textContent = (d.synopsis);
+                //popUp.querySelector('#synopsis').textContent = (d.synopsis).slice(0, 100) + '...';
+                //popUp.querySelector('#synopsis').textContent = (d.synopsis);
             })
             .on("mouseout", () => {
                 document.getElementById('pop-up').remove()
+            })
+            .on("click", (e, d, i) => {
+                modal.style.display = "block";
+                modal.querySelector('#episode-modal').textContent = "S" + d.season + " E " + d.noEpisodeSeason
+                modal.querySelector('#title-modal').textContent = d.title
+                modal.querySelector('#synopsis-modal').textContent = d.synopsis
+                modal.querySelector('#variance-modal').textContent = varianceViewers;
+
+
+                
             })
 
 )
@@ -155,7 +170,7 @@ getData.then(episodes => {
     drawAllSymbols(dots)
     drawSeasonsDots(dots)
 
-    
+    g.selectAll('.tick line').attr('opacity', 0.1)
 
 
     //TODO : Faire en sorte que l'on arrive sur une position déjà zoomée po
@@ -163,9 +178,12 @@ getData.then(episodes => {
     //Création du zoom
     const zoom = d3.zoom()
         .scaleExtent([1.1, 2])
-        .translateExtent([[0, 0], [width+margin.left+margin.right, height]])
+        //-10 -20 pour que les symbols ne sorte pas du svg
+        .translateExtent([[-10, -100], [width + margin.left +margin.right, height]])
+        // ancienne valeur .translateExtent([[0, 0], [width + margin.left +margin.right, height]])
         .on("zoom", zoomed);
 
+        
     //Ajout du zoom sur la zone du svg
     function initZoom() {
         d3.select('svg')
@@ -215,6 +233,11 @@ const margin = {top: 10, right: 40, bottom: 30, left: 40}
 const width = 1400 - margin.left - margin.right;
 
 
-const height = 700 - margin.top - margin.bottom;
+const height = innerHeight - margin.top - margin.bottom;
 
-
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }

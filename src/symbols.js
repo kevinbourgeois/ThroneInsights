@@ -307,6 +307,193 @@ const drawAllSymbols = (dots) => {
         'caption': 'Melissandre reveals her true form'
     }]);
 
+    addSymbol(dots[getEpisodeNumber(52)], [{
+        'symbol': '⭐',
+        'caption': 'Brandon goes back in time and sees his father as a child'
+    },
+    {
+        'symbol': '💀',
+        'caption': 'Ramsey kills Roose Bolton'
+    },
+    {
+        'symbol': '💀',
+        'caption': 'Euron Greyjoy kills Balon Greyjoy'
+    },
+    {
+        'symbol': '⭐',
+        'caption': 'Jon Snow is resurrected by Melissandre'
+    }]);
+
+    addSymbol(dots[getEpisodeNumber(53)], [{
+        'symbol': '⛓️',
+        'caption': 'Rickon, Osha are captured by the Boltons'
+    },
+    {
+        'symbol': '💀',
+        'caption': 'Jon kills Alliser Thorne and the mutineers'
+    }]);
+
+    addSymbol(dots[getEpisodeNumber(54)], [{
+        'symbol': '🛡️',
+        'caption': 'The Dothraki Khalasar joins Daenerys'
+    },
+    {
+        'symbol': '💀',
+        'caption': 'Osha is killed by Ramsay Bolton'
+    }]);
+
+    addSymbol(dots[getEpisodeNumber(55)], [{
+        'symbol': '🧟',
+        'caption': 'Bran sees the creation of the White Walkers'
+    },
+    {
+        'symbol': '👑',
+        'caption': 'Euron Greyjoy is crowned King of the Iron Islands'
+    },
+    {
+        'symbol': '🧟',
+        'caption': 'The Night King kills the Three-Eyed Raven and the Children of the Forest'
+    },
+    {
+        'symbol': '💀',
+        'caption': 'Hodor is killed by White Walkers'
+    }]);
+
+    addSymbol(dots[getEpisodeNumber(56)], [{
+        'symbol': '🐉',
+        'caption': 'Daenerys with her dragon tell the Dothraki she will lead them to Westeros'
+    }]);
+
+    addSymbol(dots[getEpisodeNumber(58)], [{
+        'symbol': '🏃‍♀️',
+        'caption': 'Arya leaves the House of Black and White to go back home' 
+    }]);
+
+    addSymbol(dots[getEpisodeNumber(59)], [{
+        'symbol': '🤝',
+        'caption': 'Yara and Theon join Daenerys\' forces'
+    },
+    {
+        'symbol': '⚔️',
+        'caption': 'The Battle for Winterfell'
+    },
+    {
+        'symbol': '💀',
+        'caption': 'Rickon is killed by Ramsay Bolton'
+    },
+    {
+        'symbol': '💀',
+        'caption': 'Sansa kills Ramsay Bolton by feeding him to his own dogs'
+    }]);
+
+    addSymbol(dots[getEpisodeNumber(60)], [{
+        'symbol': '💥',
+        'caption': 'Cersei blows up the Sept of Baelor'
+    },
+    {
+        'symbol': '👑',
+        'caption': 'Jon Snow is crowned King in the North'
+    },
+    {
+        'symbol': '💀',
+        'caption': 'Arya kills Walder Frey and his sons'
+    }]);
+
+    addSymbol(dots[getEpisodeNumber(61)], [{
+        'symbol': '🧟',
+        'caption': 'The White Walkers walk towards the Wall'
+    },
+    {
+        'symbol': '🐉',
+        'caption': 'Daenerys, the Dothrakis and her dragons arrive at Dragonstone'
+    }]);
+
+    addSymbol(dots[getEpisodeNumber(62)], [{
+        'symbol': '⚔️',
+        'caption': 'Yara\'s fleet gets destroyed by Euron Greyjoy'
+    },
+    {
+        'symbol': '⛓️',
+        'caption': 'Euro Greyjoy captures Yara and Ellaria Sand'
+    }]);
+
+    addSymbol(dots[getEpisodeNumber(63)], [{
+        'symbol': '💀',
+        'caption': 'Cersei kills Ellaria Sand and her daughter'
+    },
+    {
+        'symbol': '❤️‍🩹',
+        'caption': 'Jorah is cured of greyscale'
+    },
+    {
+        'symbol': '🏰',
+        'caption': 'The Unsullied capture Casterly Rock'
+    },
+    {
+        'symbol': '🏰',
+        'caption': 'The Lannister capture Highgarden'
+    },
+    {
+        'symbol': '⚔️',
+        'caption': 'Euron attacks the Unsullied fleet'
+    },
+    {
+        'symbol': '💀',
+        'caption': 'Jaime gives a poison to Olenna Tyrell'
+    }] );
+
+    addSymbol(dots[getEpisodeNumber(64)], [{
+        'symbol': '❤️',
+        'caption': 'Arya reunites with her family'
+    },
+    {
+        'symbol': '⚔️',
+        'caption': 'Daenerys rides Drogon and decimates the Lannister army'
+    },
+    {
+        'symbol': '🐉',
+        'caption': 'Drogon gets hit by a scorpion bolt'
+    }] );
+
+    addSymbol(dots[getEpisodeNumber(66)], [{
+        'symbol': '🧟',
+        'caption': 'Jon Snow and his companions are trapped by the White Walkers'
+    },
+    {
+        'symbol': '🐉',
+        'caption': 'Daenerys and her dragons save Jon Snow and his companions'
+    },
+    {
+        'symbol': '💀',
+        'caption': 'Uncle Benjen saves Jon Snow and dies'
+    },
+    {
+        'symbol': '🧟',
+        'caption': 'The night king kills Viserion and resurrects him as a wight dragon'
+    }] );
+
+    addSymbol(dots[getEpisodeNumber(67)], [{
+        'symbol': '🧟',
+        'caption': 'Cersei sees a wight, but refuses to help Jon Snow'
+    },
+    {
+        'symbol': '❤️',
+        'caption': 'Jon and Daenerys fall in love'
+    },
+    {
+        'symbol': '💀',
+        'caption': 'Littlefinger is killed by Arya during a trial'
+    },
+    {
+        'symbol': '🐉',
+        'caption': 'Jon\'s true identity is revealed'
+    },
+    {
+        'symbol': '🧟',
+        'caption': 'The Night King destroys the Wall with Viserion'
+    }] );
+
+
 
 
 
@@ -324,10 +511,34 @@ const drawAllSymbols = (dots) => {
 }
 
 const addSymbol = (dot, symbols) => { 
-    
-    let marginTop = 0;
-    for (const symbol of symbols) {
 
+    //tri des symboles par ordre alphabétique
+    symbols.sort((a, b) => {
+        if (a.symbol < b.symbol) {
+            return -1;
+        }
+        if (a.symbol > b.symbol) {
+            return 1;
+        }
+        return 0;
+    });
+
+    //const skullSymbol = symbols.filter(symbol => symbol.symbol === '💀');
+    //console.log(skullSymbol);
+
+
+    let marginTop = 0;
+
+    let lastSymbol = {};
+    let sameSymbols = [];
+
+    for (const symbol of symbols) {
+        
+        
+
+        if (lastSymbol.symbol === symbol.symbol) {
+            sameSymbols.push(lastSymbol);
+        }
 
     select('.main')
         .append('text')
@@ -352,7 +563,10 @@ const addSymbol = (dot, symbols) => {
         })
     
         marginTop += 30;
+
+        lastSymbol = symbol; 
     }
+
 
     
 

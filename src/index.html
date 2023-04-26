@@ -7,6 +7,21 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
+
+    <!-- The Modal -->
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+        <div id="episode-modal"></div>
+        <p id="title-modal"></p>
+        <div id="variance-modal"></div>
+        <div id="synopsis-modal"></div>
+    </div>
+  
+  </div>
+
     <section id="title-section">
         <img src="img/logo.png">
         <h1>THRONES INSIGHTS</h1>
@@ -46,7 +61,8 @@
 
         </div>
     </section>
-
+<!--
+    
     <section id="bottom-section">
         <h3>Développeurs</h3>
         <div class="dev">
@@ -75,6 +91,7 @@
    <div id="myDiv">
 
    </div>
+-->
     <script src="app.js" type="module"> </script>
 
     <template id="template-pop-up">
@@ -83,15 +100,10 @@
 
         <div id="pop-up">
             <h2 id="title">Test title</h2>
-            <p id="synopsis">test</p>
+            <p id="synopsis"></p>
             <p id="variance">
 
             </p>
-            <ul>
-                <li>Mort de joffrey</li>
-                <li>John snow se...</li>
-                <li>Death</li>
-            </ul>
             <button>See more...</button>
         </div>
     </template>
