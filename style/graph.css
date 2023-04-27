@@ -42,54 +42,35 @@ g {
     margin: 0 10%;
 }
 
-/* The Modal (background) */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  }
-  
-  /* Modal Content/Box */
-  .modal-content {
-    background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
-  }
+
+.tick line {
+    opacity: 0.1;
+}
+
 
 .season-one {
-    fill: aqua;
+    fill: #222222;
 }
 .season-two {
-    fill: blue;
+    fill: #545640;
 }
 .season-three {
-    fill: green;
+    fill: #8E9188;
 }
 .season-four {
-    fill: yellow;
+    fill: #253741;
 }
 .season-five {
-    fill: orange;
+    fill: #893932;
 }
 .season-six {
-    fill: red;
+    fill: #B0491C;
 }
 .season-seven {
-    fill: purple;
+    fill: #BE8F57;
 }
 .season-eight {
-    fill: pink;
+    fill: #E8BA64;
 }
-
- 
 
 

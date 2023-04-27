@@ -1,5 +1,7 @@
 import { select } from "d3-selection";
 
+
+
 const drawAllSymbols = (dots) => {
     //addSymbol(dots[6], ['☠️'], "Khal Drogo pours molten lava on Daenerys' brother");
     //addSymbol(dots[8], ['🧟'], "Jon Snow kills the first White Walker");
@@ -16,7 +18,7 @@ const drawAllSymbols = (dots) => {
 
     addSymbol(dots[getEpisodeNumber(8)], [{
         'symbol': '🧟',
-        'caption': 'Jon Snow kills the first White Walker'
+        'caption': 'Jon Snow kills a wight'
     }]);
 
     addSymbol(dots[getEpisodeNumber(9)], [{
@@ -493,6 +495,109 @@ const drawAllSymbols = (dots) => {
         'caption': 'The Night King destroys the Wall with Viserion'
     }] );
 
+    addSymbol(dots[getEpisodeNumber(68)], [{
+        'symbol': '🏃‍♀️',
+        'caption': 'Theon rescues Yara'
+    },
+
+    {
+        'symbol': '🐉',
+        'caption': 'Jon Snow rides Rhaegal'
+    },
+    {
+        'symbol': '🐉',
+        'caption': 'Jon learns about his true identity'
+    }] );
+
+    addSymbol(dots[getEpisodeNumber(69)], [{
+        'symbol': '❤️',
+        'caption': 'Arya seduces Gendry'
+    },
+    {
+        'symbol': '🤝',
+        'caption': 'Brienne is knighted by Jaime'
+    },
+    {
+        'symbol': '🐉',
+        'caption': 'Jon reveals his true identity to Daenerys'
+    }] );
+
+    addSymbol(dots[getEpisodeNumber(70)], [{
+        'symbol': '⚔️',
+        'caption': 'The Night King and his army arrive at Winterfell'
+    },
+    {
+        'symbol': '💀',
+        'caption': 'Lyan Mormont is killed by a wight giant'
+    },
+    {
+        'symbol': '💀',
+        'caption': 'Beric Dondarrion is killed by the Night King'
+    },
+    {
+        'symbol': '💀',
+        'caption': 'Jorah Mormont is killed defending Daenerys'
+    },
+    {
+        'symbol': '💀',
+        'caption': 'Theon Greyjoy is killed by the Night King defending Bran'
+    },
+    {
+        'symbol': '🧟',
+        'caption': 'The Night King is killed by Arya Stark'
+    },    {
+        'symbol': '💀',
+        'caption': 'Melisandre dies after the battle'
+    },] );
+
+    addSymbol(dots[getEpisodeNumber(71)], [{
+        'symbol': '🐉',
+        'caption': 'Jon Snow reaveals his true identity to Daenerys'
+    },
+    {
+        'symbol': '⚔️',
+        'caption': 'Daenerys, Jon and her allies go to King\'s Landing'
+    },
+    {
+        'symbol': '🐉',
+        'caption': 'Euron kills Rhaegal with a scorpion bolt'
+    },
+    {
+        'symbol': '💔',
+        'caption': 'Cersei refuses to surrender'
+    },
+    {
+        'symbol': '💀',
+        'caption': 'Missandei is beheaded by the Mountain'
+    }]  );
+
+    addSymbol(dots[getEpisodeNumber(72)], [{
+        'symbol': '💀',
+        'caption': 'Varys is executed by Daenerys'
+    },
+    {
+        'symbol': '⚔️',
+        'caption': 'Daenerys destroys Euro\'s fleet and the scorpions'
+    },{
+        'symbol': '🐉',
+        'caption': 'Daenerys destroys King\'s Landing with Drogon'
+    },
+    {
+        'symbol': '💀',
+        'caption': 'Jaime, injured, kills Euron'
+    },{
+        'symbol': '💀',
+        'caption': 'The Hound kills the Mountain'
+    },
+    {
+        'symbol': '💀',
+        'caption': 'Cersei and Jaime die in the Red Keep'
+    }] );
+
+    addSymbol(dots[getEpisodeNumber(73)], [{
+        'symbol': '🏁',
+        'caption': 'The End !'
+    }] );
 
 
 
@@ -547,19 +652,32 @@ const addSymbol = (dot, symbols) => {
         .attr('y', dot.cy.baseVal.value - (30 + marginTop))
         .style('fill', 'black')
         .text(symbol.symbol)
-        //sur le hover de la div, on affiche une div avec du texte
+        .style('opacity', 0.8)
+        //sur le hover l'élément symbol on lui met une opacité de 1
+
         .on('mouseover', (e) => {
-            select('.main')
+            select('svg')
                 .append('text')
                 .attr('class', 'caption')
-                .attr('x', e.pageX)
-                .attr('y', dot.cy.baseVal.value)
+                .attr('x', e.clientX)
+                .attr('y', e.clientY)
+                //si la div sort du cadre, on la met à l'intérieur
+                .attr('transform', () => {
+                    if (e.clientX > 1000) {
+                        return 'translate(-200, 0)';
+                    }                    //if (e.clientY > 500) {
+                    //    return 'translate(0, -100)';
+                    //}
+                    return 'translate(0, 0)';
+                })
                 .style('fill', 'black')
                 .text(symbol.caption)
+                
         })
+        .on("mousemove", function(e){return select('.caption').style("top", (e.pageY-10)+"px").style("left",(e.pageX+10)+"px");})
         //sur le mouseout de la div, on supprime la div avec du texte
         .on('mouseout', () => {
-            select('.caption').remove()
+            select('.caption').remove  ();
         })
     
         marginTop += 30;
