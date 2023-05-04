@@ -1,24 +1,283 @@
-import { select } from "d3-selection";
+import { svg } from "d3-fetch";
+import { select, selectAll } from "d3-selection";
 
 
+const popUp = document.querySelector('#popup-symbol');
+const popUpContent = popUp.querySelector('.popup-content');
+
+const SYMBOL_OPACITY = 0.5;
+
+
+
+
+const addSymbol = (dot, symbols) => { 
+    let marginTop = 0;
+
+// Tableaux pour stocker les occurrences
+const occurrences = {};
+
+// Parcourir le tableau d'origine
+symbols.forEach((element) => {
+  // Récupérer la propriété pertinente de l'objet pour comparer
+  const symbol = element.symbol;
+  
+  // Vérifier si l'élément est déjà présent dans occurrences
+  if (!occurrences[symbol]) {
+    // Si l'élément n'est pas présent, le créer comme un nouveau tableau
+    occurrences[symbol] = [element];
+  } else {
+    // Si l'élément est déjà présent, ajouter l'élément au tableau existant
+    occurrences[symbol].push(element);
+  }
+});
+
+for(let symbol in occurrences) {
+    var emojiSymbol = ""
+    let textSymbol = "";
+    let multiple = false;
+
+    if (occurrences[symbol].length > 1) {
+        multiple = true;
+        emojiSymbol = occurrences[symbol][0].symbol + occurrences[symbol].length;
+        //on récupère toutes les captions et on les stocke dans un tableau
+        var captions = [];
+
+        occurrences[symbol].forEach((element) => {
+            captions.push(element.caption);
+        });
+
+
+
+    } else {
+        emojiSymbol = occurrences[symbol][0].symbol;
+        textSymbol = occurrences[symbol][0].caption;
+    }
+
+    select('.main')
+    .append('text')
+    .attr('class', 'symbol')
+    .attr('x', dot.cx.baseVal.value - 12)
+    .attr('y', dot.cy.baseVal.value - (30 + marginTop))
+    .style('fill', 'black')
+    .text(emojiSymbol)
+    .style('opacity', SYMBOL_OPACITY)
+    .on('mouseover', (e) => {
+        popUp.style.display = "block";
+        popUp.style.position = "absolute";
+        popUp.style.top = e.layerY - 30 + "px";
+        popUp.style.left = e.clientX + 10 + "px";
+        popUpContent.innerHTML = ""; 
+
+        //change l'opacité du symbole survolé à 1
+        select(e.target).style('opacity', 1);
+
+        if (multiple) 
+        {
+            console.log(occurrences);
+
+            //récupère les captions propre au symbole survolé
+            var captions = occurrences[symbol].map(a => a.caption);
+
+            
+            for (const caption of captions) {
+                popUpContent.innerHTML += caption + "<br>";
+            }
+              
+        } else {
+            popUpContent.innerHTML = textSymbol;
+            
+
+        }
+            
+    })
+    .on("mousemove", function(e){return select('.caption').style("top", (e.pageY-10)+"px").style("left",(e.pageX+10)+"px");})
+    //sur le mouseout de la div, on supprime la div avec du texte
+    .on('mouseout', (e) => {
+        select(e.target).style('opacity', SYMBOL_OPACITY);
+        //select('.caption').remove();
+        popUp.style.display = "none";
+    })
+    marginTop += 30;    
+}
+
+
+/*
+    for (const symbol of symbols) {
+
+
+    select('.main')
+        .append('text')
+        .attr('class', 'symbol')
+        .attr('x', dot.cx.baseVal.value - 12)
+        .attr('y', dot.cy.baseVal.value - (30 + marginTop))
+        .style('fill', 'black')
+        .text(symbol.symbol)
+        .style('opacity', 0.8)
+        //sur le hover l'élément symbol on lui met une opacité de 1
+
+        .on('mouseover', (e) => {
+            select('svg')
+                .append('text')
+                .attr('class', 'caption')
+                .attr('x', e.clientX)
+                .attr('y', e.clientY)
+                //si la div sort du cadre, on la met à l'intérieur
+                .attr('transform', () => {
+                    if (e.clientX > 1000) {
+                        return 'translate(-200, 0)';
+                    }                    //if (e.clientY > 500) {
+                    //    return 'translate(0, -100)';
+                    //}
+                    return 'translate(0, 0)';
+                })
+                .style('fill', 'black')
+                .text(symbol.caption)
+                
+        })
+        .on("mousemove", function(e){return select('.caption').style("top", (e.pageY-10)+"px").style("left",(e.pageX+10)+"px");})
+        //sur le mouseout de la div, on supprime la div avec du texte
+        .on('mouseout', () => {
+            select('.caption').remove  ();
+        })
+    
+        marginTop += 30;
+
+    }
+*/
+
+    
+
+
+  
+        
+}
+
+
+
+//fonction qui rend le numero devant l'episode en faisant + 1 
+const getEpisodeNumber = (noEpisode) => {
+    return noEpisode-1;
+}
+
+const drawSeasonsDots = (dots) => {
+    colorDots(dots, 0, 10, 'season-one');
+    colorDots(dots, 10, 20, 'season-two');
+    colorDots(dots, 20, 30, 'season-three');
+    colorDots(dots, 30, 40, 'season-four');
+    colorDots(dots, 40, 50, 'season-five');
+    colorDots(dots, 50, 60, 'season-six');
+    colorDots(dots, 60, 67, 'season-seven');
+    colorDots(dots, 67, 73, 'season-eight');
+}
+
+const colorDots = (dots, firstEp, LastEp, className) => {
+    for(let i = firstEp; i < (LastEp); i++) {
+        //on ajoute la classe .season-one à chaque point
+        dots[i].classList.add(className);
+    }
+}
 
 const drawAllSymbols = (dots) => {
     //addSymbol(dots[6], ['☠️'], "Khal Drogo pours molten lava on Daenerys' brother");
     //addSymbol(dots[8], ['🧟'], "Jon Snow kills the first White Walker");
 
     addSymbol(dots[getEpisodeNumber(1)], [{
+        'symbol': '🧟',
+        'caption': 'First attack of the White Walkers'
+    },
+    {
+        'symbol': '💍',
+        'caption': 'Viserys forces her sister to wed Khal Drogo'
+    },
+    {
+        'symbol': '🐉',
+        'caption': 'Daenerys is given three dragon eggs'
+    },
+    {
+        'symbol': '🩸',
+        'caption': 'Jaime pushes Bran Stark off a tower window'
+    }
+]);
+
+    addSymbol(dots[getEpisodeNumber(2)], [{
+        'symbol': '🤝',
+        'caption': 'Ned Stark is named Hand of the King'
+    },
+    {
+        'symbol': '💀',
+        'caption': 'Bran\'s assassin is killed by his wolf "Summer"'
+    },
+    {
+        'symbol': '💀',
+        'caption': 'Sansa\'s direwolf "Lady" is killed after the attack on Joffrey'
+    },
+    {
+        'symbol': '🛡️',
+        'caption': 'Jon Snow joins the Night\'s Watch'
+    }
+    ]);
+
+    addSymbol(dots[getEpisodeNumber(3)], [{
         'symbol': '🧑‍🦽',
-        'caption': 'Brandon Stark is paralyzed'
+        'caption': 'Brans Stark is paralysed from the waist down'
+    },
+    {
+        'symbol': '🤰🏼',
+        'caption': 'Daenerys is pregnant'
+    }]);
+    addSymbol(dots[getEpisodeNumber(4)], [
+    {
+        'symbol': '⛓️',
+        'caption': 'Tyrion is captured by Catelyn Stark'
     }]);
 
+    addSymbol(dots[getEpisodeNumber(5)], [
+        {
+            'symbol': '🩸',
+            'caption': 'Ned Stark is injured by Jaime Lannister after Tyrion\'s capture'
+        }]);
+
     addSymbol(dots[getEpisodeNumber(6)], [{
-        'symbol': '☠️',
+        'symbol': '⛓️',
+        'caption': 'Tyrion wins his trial by combat at the Eyrie'
+    },
+    {
+        'symbol': '👑',
+        'caption': 'We learn that Joffrey and his siblings are not Robert Baratheon\'s children'
+    },
+    {
+        'symbol': '💀',
         'caption': 'Khal Drogo pours molten lava on Daenerys\' brother'
+    }]);
+
+    addSymbol(dots[getEpisodeNumber(7)], [{
+        'symbol': '💀',
+        'caption': 'King Robert Baratheon dies after being gored by a boar'
+    },
+    {
+        'symbol': '⚔️',
+        'caption': 'Ned Starks\' men are killed by Littlefinger and the Lanisters'
     }]);
 
     addSymbol(dots[getEpisodeNumber(8)], [{
         'symbol': '🧟',
         'caption': 'Jon Snow kills a wight'
+    },
+    {
+        'symbol': '⛓️',
+        'caption': 'Sansa is captured by the Lanisters'
+    },
+    {
+        'symbol': '⛓️',
+        'caption': 'Ned Stark is captured by the Lanisters'
+    },
+    {
+        'symbol': '💀',
+        'caption': 'Arya\' sword teacher is killed by the Lanisters'
+    },
+    {
+        'symbol': '🩸',
+        'caption': 'Khal Drogo is injured during a fight'
     }]);
 
     addSymbol(dots[getEpisodeNumber(9)], [{
@@ -28,19 +287,44 @@ const drawAllSymbols = (dots) => {
     {
         'symbol': '⛓️',
         'caption': 'Jaime is captured by Robb Stark'
+    },
+    {
+        'symbol': '⚔️',
+        'caption': 'Rob Stark wins his first battle against the Lanisters'
     }]);
 
     addSymbol(dots[getEpisodeNumber(10)], [{
         'symbol': '💀',
-        'caption': 'Daenerys kills Khal Drogo'
+        'caption': 'Daenerys kills Khal Drogo because of his vegetative state'
     }, 
     {   'symbol': '🐉',
-        'caption': "Daenerys's dragons are born"}]
-    );
+        'caption': "Daenerys's dragons are born"
+    },
+    {
+        'symbol': '🤝',
+        'caption': 'Tywin Lannister is named Hand of the King'
+    },
+    {
+        'symbol': '🏃‍♀️',
+        'caption': 'Arya Stark escapes King\'s Landing smuggled by Yoren'
+    },
+    {
+        'symbol': '💀',
+        'caption': 'Daenerys\'s unborn child dies'
+    },
+    {
+        'symbol': '💀',
+        'caption': 'Daenerys burns the witch alive on Khal Drogo\'s funeral pyre'
+    }]);
 
-    addSymbol(dots[getEpisodeNumber(11)], [{
+    /*addSymbol(dots[getEpisodeNumber(11)], [{
         'symbol': '👑',
         'caption': 'Rob Stark is crowned king'
+    }]);*/
+
+    addSymbol(dots[getEpisodeNumber(12)], [{
+        'symbol': '🧟',
+        'caption': 'Jon Snow discovers that Craster sacrifices his sons to the White Walkers'
     }]);
 
     addSymbol(dots[getEpisodeNumber(13)], [{
@@ -100,6 +384,24 @@ const drawAllSymbols = (dots) => {
     addSymbol(dots[getEpisodeNumber(25)], [{
         'symbol': '❤️',
         'caption': 'Jon Snow and Ygritte fall in love'
+    }]);
+
+    addSymbol(dots[getEpisodeNumber(26)], [{
+        'symbol': '⛓️',
+        'caption': 'Melissandre buys Gendry from the Brotherhood without Banners'
+    },
+    {
+        'symbol': '🧗',
+        'caption': 'Jon Snow climbs the Wall with the Wildlings'
+    }]);
+
+    addSymbol(dots[getEpisodeNumber(27)], [{
+        'symbol': '🩸',
+        'caption': 'Theon is castrated by Ramsay Bolton'
+    },
+    {
+        'symbol': '❤️',
+        'caption': 'Talisa is pregnant'
     }]);
 
     addSymbol(dots[getEpisodeNumber(28)], [{
@@ -614,107 +916,4 @@ const drawAllSymbols = (dots) => {
 
 
 }
-
-const addSymbol = (dot, symbols) => { 
-
-    //tri des symboles par ordre alphabétique
-    symbols.sort((a, b) => {
-        if (a.symbol < b.symbol) {
-            return -1;
-        }
-        if (a.symbol > b.symbol) {
-            return 1;
-        }
-        return 0;
-    });
-
-    //const skullSymbol = symbols.filter(symbol => symbol.symbol === '💀');
-    //console.log(skullSymbol);
-
-
-    let marginTop = 0;
-
-    let lastSymbol = {};
-    let sameSymbols = [];
-
-    for (const symbol of symbols) {
-        
-        
-
-        if (lastSymbol.symbol === symbol.symbol) {
-            sameSymbols.push(lastSymbol);
-        }
-
-    select('.main')
-        .append('text')
-        .attr('class', 'symbol')
-        .attr('x', dot.cx.baseVal.value - 12)
-        .attr('y', dot.cy.baseVal.value - (30 + marginTop))
-        .style('fill', 'black')
-        .text(symbol.symbol)
-        .style('opacity', 0.8)
-        //sur le hover l'élément symbol on lui met une opacité de 1
-
-        .on('mouseover', (e) => {
-            select('svg')
-                .append('text')
-                .attr('class', 'caption')
-                .attr('x', e.clientX)
-                .attr('y', e.clientY)
-                //si la div sort du cadre, on la met à l'intérieur
-                .attr('transform', () => {
-                    if (e.clientX > 1000) {
-                        return 'translate(-200, 0)';
-                    }                    //if (e.clientY > 500) {
-                    //    return 'translate(0, -100)';
-                    //}
-                    return 'translate(0, 0)';
-                })
-                .style('fill', 'black')
-                .text(symbol.caption)
-                
-        })
-        .on("mousemove", function(e){return select('.caption').style("top", (e.pageY-10)+"px").style("left",(e.pageX+10)+"px");})
-        //sur le mouseout de la div, on supprime la div avec du texte
-        .on('mouseout', () => {
-            select('.caption').remove  ();
-        })
-    
-        marginTop += 30;
-
-        lastSymbol = symbol; 
-    }
-
-
-    
-
-
-  
-        
-}
-
-//fonction qui rend le numero devant l'episode en faisant + 1 
-const getEpisodeNumber = (noEpisode) => {
-    return noEpisode-1;
-}
-
-const drawSeasonsDots = (dots) => {
-    colorDots(dots, 0, 10, 'season-one');
-    colorDots(dots, 10, 20, 'season-two');
-    colorDots(dots, 20, 30, 'season-three');
-    colorDots(dots, 30, 40, 'season-four');
-    colorDots(dots, 40, 50, 'season-five');
-    colorDots(dots, 50, 60, 'season-six');
-    colorDots(dots, 60, 67, 'season-seven');
-    colorDots(dots, 67, 73, 'season-eight');
-}
-
-const colorDots = (dots, firstEp, LastEp, className) => {
-    for(let i = firstEp; i < (LastEp); i++) {
-        //on ajoute la classe .season-one à chaque point
-        dots[i].classList.add(className);
-    }
-}
-
-
 export {drawAllSymbols, drawSeasonsDots};

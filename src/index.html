@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Throne Insights</title>
     <link rel="stylesheet" href="../style/app.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
@@ -24,7 +24,25 @@
   
   </div>
 
-    <section id="title-section">
+  <div id="popup-symbol">
+    <div>
+        <ul class="popup-content">
+            <li>
+                test
+            </li>
+        </ul>
+    </div>
+  </div>
+
+  <div id="popup-episode">
+        <div id="popup-episode-container">
+            <h3 id="episode"></h3>
+        <!-- <h2 id="title"></h2>-->
+            <p id="variance"></p>
+        </div>
+  </div>
+
+    <section id="title-section" href="description-section">
         <img src="img/logo.png">
         <h1>THRONES INSIGHTS</h1>
         <p>Le contexte d’utilisation de ce jeu de données va permettre d’expliquer la tendance du nombre de
@@ -46,22 +64,74 @@
     <section id="graph-section">
         <div id="selection-button">
 
-            <button id="btn-all">ALL</button>
-            <button id="s1">S1</button>
-            <button id="s2">S2</button>
-            <button id="s3">S3</button>
-            <button id="s4">S4</button>
-            <button id="s5">S5</button>
-            <button id="s6">S6</button>
-            <button id="s7">S7</button>
-            <button id="s8">S8</button>
+            <button class="button-season" id="btn-all">ALL</button>
+            <button class="button-season" id="s1">S1</button>
+            <button class="button-season" id="s2">S2</button>
+            <button class="button-season" id="s3">S3</button>
+            <button class="button-season" id="s4">S4</button>
+            <button class="button-season" id="s5">S5</button>
+            <button class="button-season" id="s6">S6</button>
+            <button class="button-season" id="s7">S7</button>
+            <button class="button-season" id="s8">S8</button>
 
         </div>
 
-
+        <div id="filters-container">
+            <button class="filter" id="skull" value="💀">💀</button>
+            <button class="filter" id="wight" value="🧟">🧟</button>
+            <button class="filter" id="star" value="⭐">⭐</button>   
+            <button class="filter" id="heart" value="❤️">❤️</button>
+            <button class="filter" id="dragon" value="🐉">🐉</button>
+        </div>
+        
         <div id="graph">
 
 
+        </div>
+    </section>
+
+    <section id="observations-section">
+        <h2>Observations</h2>
+        <div class="observation-row">
+            <div>
+                <div class="emoji-observation">🐉</div>
+                <div class="variance-observation">
+                    <span id=arrow-up class="material-symbols-outlined">
+                        trending_up
+                        </span>
+                </div>
+                <p>Daenery's and her dragons attract the viewers</p>
+            </div>
+            <div>
+                <div class="emoji-observation">🐉</div>
+                <div class="variance-observation">
+                    <span id=arrow-up class="material-symbols-outlined">
+                        trending_up
+                        </span>
+                </div>
+                <p>Tyrion's storyline boosts the viewership of the serie</p>
+            </div>   
+        </div>
+
+        <div class="observation-row">
+            <div>
+                <div class="emoji-observation">🧟</div>
+                <div class="variance-observation">
+                    <span id=arrow-up class="material-symbols-outlined">
+                        trending_up
+                        </span>
+                </div>
+                <p>The White Walkers don't seem to draw much interest from the viewers</p>
+            </div>
+            <div>
+                <div class="emoji-observation">🐉</div>
+                <div class="variance-observation">
+                    <span id=arrow-up class="material-symbols-outlined">
+                        trending_up
+                        </span>
+                </div>
+                <p>Tyrion's storyline boosts the viewership of the serie</p>
+            </div>   
         </div>
     </section>
 <!--
@@ -99,15 +169,10 @@
 
     <template id="template-pop-up">
 
-
-
         <div id="pop-up">
-            <h2 id="title">Test title</h2>
-            <p id="synopsis"></p>
-            <p id="variance">
+            <div class="content-pop-up">
 
-            </p>
-            <button>See more...</button>
+            </div>
         </div>
     </template>
 

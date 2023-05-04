@@ -1,0 +1,24 @@
+.observation-row {
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.observation-row > div {
+    background-color: aqua;
+    text-align: center;
+    padding: 20px;
+}
+
+.emoji-observation {
+    font-size: 3em;
+}
+
+.variance-observation {
+    font-size: 2em;
+}
+
+.observation-row p {
+    font-size: 1.5em;
+}
+

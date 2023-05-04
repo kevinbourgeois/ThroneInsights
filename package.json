@@ -33,6 +33,7 @@
     "d3-zoom": "^3.0.0",
     "modal.css": "^0.2.0",
     "papaparse": "^5.4.0",
-    "parcel-bundler": "^1.12.5"
+    "parcel-bundler": "^1.12.5",
+    "runes": "^0.4.3"
   }
 }

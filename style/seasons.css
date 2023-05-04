@@ -1,0 +1,101 @@
+.season-one {
+
+    fill: #ff6961;
+}
+.season-two {
+    
+    fill: #ffb480;
+}
+.season-three {
+
+    fill: #f8f38d;
+}
+.season-four {
+    fill: #42d6a4;
+}
+.season-five {
+    fill: #08cad1;
+}
+.season-six {
+    fill: #59adf6;
+}
+.season-seven {
+    fill: #9d94ff;
+}
+.season-eight {
+    fill: #c780e8;
+}
+#selection-button button.button-season.active {
+    background-color: red;
+
+}
+
+#selection-button button {
+    opacity: 0.8;
+    color: white;
+    padding: 10px 30px;
+    font-family: Roboto, sans-serif;
+    font-weight: 0;
+    font-size: 14px;
+    border: none;
+    /*box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;*/
+    border-radius: 0px;
+    transition : 1000ms;
+    transform: translateY(0);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+}
+#selection-button button:hover {
+    transition : 1000ms;
+padding: 10px 50px;
+transform : translateY(-0px);
+    color: #dededeb6;
+}
+
+
+#selection-button {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+    gap: 10px;
+}
+#btn-all {
+    background-color: #000000;
+}
+#s1 {
+    background: linear-gradient(90deg, #ff6961 0%, #000000 100%);
+}
+#s2 {
+    border-color: #ffb480;
+    background: linear-gradient(90deg, #ffb480 0%, #000000 100%);
+}
+#s3 {
+    border-color: #f8f38d;
+    background: linear-gradient(90deg, #f8f38d 0%, #000000 100%);
+}
+#s4 {
+    border-color: #42d6a4;
+    background: linear-gradient(90deg, #42d6a4 0%, #000000 100%);
+}
+#s5 {
+    border-color: #08cad1;
+    background: linear-gradient(90deg, #08cad1 0%, #000000 100%);
+}
+#s6 {
+    border-color: #59adf6;
+    background: linear-gradient(90deg, #59adf6 0%, #000000 100%);
+}
+#s7 {
+    border-color: #9d94ff;
+    background: linear-gradient(90deg, #9d94ff 0%, #000000 100%);
+}
+#s8 {
+    border-color: #c780e8;
+    background: linear-gradient(90deg, #c780e8 0%, #000000 100%);
+}
+
+
+
+

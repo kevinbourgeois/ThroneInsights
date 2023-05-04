@@ -6,71 +6,25 @@ circle {
     clip-path: border-box;
 }
 
-#selection-button button {
-    background-color: black;
-    color: white;
-    padding: 10px 30px;
 
-}
-#selection-button {
-    display: flex;
-    justify-content: center;
-    margin: 10px;
-    gap: 10px;
-}
 
 g {
     display: block;
     width: 13em;
 }
-#pop-up {
-    border: 0.5px solid black;
-    box-shadow: 1px 4px 8px rgba(0, 0, 0, 0.5);
-    background-color: #F7F8FC;
-    display: flex;
-    flex-direction: column;
-    max-width: 100px;
-    align-items: center;
-    position: absolute;
-}
 
-#pop-up #title {
-    padding: 0 20px;
-    font-size: 1.2em;
-}
-#pop-up #synopsis {
-    margin: 0 10%;
-}
 
 
 .tick line {
     opacity: 0.1;
 }
 
+#arrow-down{
+    color: red;
+}
 
-.season-one {
-    fill: #222222;
-}
-.season-two {
-    fill: #545640;
-}
-.season-three {
-    fill: #8E9188;
-}
-.season-four {
-    fill: #253741;
-}
-.season-five {
-    fill: #893932;
-}
-.season-six {
-    fill: #B0491C;
-}
-.season-seven {
-    fill: #BE8F57;
-}
-.season-eight {
-    fill: #E8BA64;
+#arrow-up{
+    color: #00ff00;
 }
 
 

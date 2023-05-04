@@ -4,17 +4,20 @@ import {scaleBand, scaleLinear} from "d3-scale";
 import * as d3 from 'd3'
 import { drawAllSymbols, drawSeasonsDots } from "./symbols";
 
+//importe le fichier filter.js
+import {filter} from "./filter";
+
+
+
 const templatePopUp = document.querySelector('#template-pop-up')
 // Get the modal
 const modal = document.getElementById("myModal");
 
+const popUp = document.querySelector('#popup-episode');
 //read insights.json file
 const insights = require('../ressources/insights.json');
 
-console.log(insights)
-//récupère l'objet dans insights qui a la propriété episode 1
-const insightEpisode1 = insights.find(insight => insight.episode === "11")
-console.log(insightEpisode1)
+
 
 /*
     Chargement des données tout ce qui suit s'éxécute
@@ -41,7 +44,7 @@ getData.then(episodes => {
     //échelle pour l'axe x
     let echelleEpisodes = scaleLinear()
         .domain([1,73])
-        .range([0, width])
+        .range([20, width + 2000])
         .clamp(true)
 
     //échelle pour l'axe y
@@ -55,7 +58,48 @@ getData.then(episodes => {
     let axeXEpisodes = d3.axisBottom(echelleEpisodes)
     let axeYViewers = d3.axisLeft(echelleViewers).tickSize(-innerWidth)
 
+    
+    /*
+        Configuration de la graduation de l'axe Y
+    */
+    axeYViewers.tickFormat(d => d + 'm')
+    
+    axeYViewers.ticks(5)
+    
+    axeYViewers.tickPadding(10)
 
+    /*
+        Configuration de la graduation de l'axe X
+    */
+    axeXEpisodes.ticks(0)
+    axeXEpisodes.tickSize(0)
+    //axeXEpisodes.tickFormat(d3.format("d"))
+
+
+    /*
+    axeXEpisodes.tickValues([1, 11, 21, 31, 41, 51, 61, 70, 73])
+
+
+    axeXEpisodes.tickFormat((d, i) => {
+        if (i === 0) {
+            return 'S1'
+        } else if (i === 1) {
+            return 'S2'
+        } else if (i === 2) {
+            return 'S3'
+        } else if (i === 3) {
+            return 'S4'
+        } else if (i === 4) {
+            return 'S5'
+        } else if (i === 5) {
+            return 'S6'
+        } else if (i === 6) {
+            return 'S7'
+        } else if (i === 7) {
+            return 'S8'
+        } 
+    })
+    */
 
     const g = svg.append('g')
 
@@ -103,7 +147,7 @@ getData.then(episodes => {
         .attr('d', line)
         .attr('fill', 'none')
         .attr('stroke', 'black')
-        .attr('stroke-width', 2)
+        .attr('stroke-width', 3)
         .attr("class", "line-graph")
 
 
@@ -113,25 +157,21 @@ getData.then(episodes => {
         .selectAll("circle")
         .data(episodes)
         .join(enter => enter.append("circle")
-            .attr('r', 3)
+            .attr('r', 6)
             .attr("cx", (d) => echelleEpisodes(d.noEpisodeOverall))
             .attr("cy", (d) => echelleViewers(d.viewers))
             .attr("fill", "blue")
             .attr("class", "dot")
             .attr("stroke", "black")
             .on("mouseover", (e, d, i) => {
-                const copyPopUp = templatePopUp.content.cloneNode(true)
+                popUp.style.display = "block";
+                popUp.style.position = "absolute";
+                popUp.style.top = e.layerY - 30 + "px";
+                popUp.style.left = e.clientX + 10 + "px";
 
-                document.querySelector('body').append(copyPopUp)
-
-                const popUp = document.querySelector('#pop-up')
-
-
-                popUp.style.left = (e.pageX-70) + "px"
-                popUp.style.top = e.pageY + 10 +  "px"
 
                 if (d.noEpisodeOverall !== '1') {
-                const varianceViewers = d.viewers - episodes[d.noEpisodeOverall-2].viewers;
+                var varianceViewers = d.viewers - episodes[d.noEpisodeOverall-2].viewers;
                 const divVariance =  document.querySelector('#variance')
 
 
@@ -148,29 +188,59 @@ getData.then(episodes => {
 
 
 
-                popUp.querySelector('#variance').textContent = Math.abs(varianceViewers.toFixed(2)*1000) + 'k Viewers'
-                divVariance.insertAdjacentHTML("afterbegin", arrowHTML)
+                    popUp.querySelector('#variance').textContent = Math.abs(varianceViewers.toFixed(2)*1000) + 'k Viewers'
+                    divVariance.insertAdjacentHTML("afterbegin", arrowHTML)
                     }
-//Mets les données dans la popup
-                popUp.querySelector('#title').textContent = "S" + d.season + " E " + d.noEpisodeSeason + " " +  d.title
-                //popUp.querySelector('#synopsis').textContent = (d.synopsis).slice(0, 100) + '...';
-                //popUp.querySelector('#synopsis').textContent = (d.synopsis);
+
+
+                popUp.querySelector('#episode').textContent = "S" + d.season + " E " + d.noEpisodeSeason
+
             })
             .on("mouseout", () => {
-                document.getElementById('pop-up').remove()
+                popUp.style.display = "none";
+                popUp.querySelector('#variance').textContent = ""
+                popUp.querySelector('#episode').textContent = ""
             })
             .on("click", (e, d, i) => {
                 modal.style.display = "block";
-                modal.querySelector('#episode-modal').textContent = "S" + d.season + " E " + d.noEpisodeSeason
-                modal.querySelector('#title-modal').textContent = d.title
+                modal.querySelector('#episode-modal').textContent = "S0" + d.season + " E0" + d.noEpisodeSeason
+                modal.querySelector('#title-modal').textContent =  d.title.toUpperCase()
                 modal.querySelector('#synopsis-modal').textContent = d.synopsis
-                //modal.querySelector('#insight-modal').textContent
+            
+
+                if (d.noEpisodeOverall !== '1') {
+                    var varianceViewers = d.viewers - episodes[d.noEpisodeOverall-2].viewers;
+                    const divVariance =  document.querySelector('#variance')
+    
+    
+                    let arrowHTML = "";
+                    if (varianceViewers > 0) {
+                        arrowHTML = "<span id=arrow-up class=\"material-symbols-outlined\">\n" +
+                                    "trending_up\n" +
+                                    "</span>"
+                    } else {
+                        arrowHTML = "<span id=arrow-down class=\"material-symbols-outlined\">\n" +
+                                    "trending_down\n" +
+                                    "</span>"
+                    }
+                    modal.querySelector('#variance-modal').textContent = " " + Math.abs(varianceViewers.toFixed(2)*1000) + 'k Viewers'
+                    modal.querySelector('#variance-modal').insertAdjacentHTML("afterbegin", arrowHTML)
+                }
+
+
+
                 const insightEpisode = insights.find(insight => insight.episode === d.noEpisodeOverall)
                 
                 if (insightEpisode) {
+                    
+
+                    modal.querySelector('#insight-modal').style.display = "block"
+                    //ajoute un titre à l'insight
+
                     modal.querySelector('#insight-modal').textContent = insightEpisode.insight
+                    modal.querySelector('#insight-modal').insertAdjacentHTML("afterbegin", "<h4 id='title-insight'>Our Insight</h4>")
                 } else {
-                    modal.querySelector('#insight-modal').textContent = ""
+                    modal.querySelector('#insight-modal').style.display = "none"
                 }
 
             
@@ -183,12 +253,12 @@ getData.then(episodes => {
     //récupère la node list tout les éléments avec la class dot et les stock dans une variable
     const dots = document.querySelectorAll('.dot') 
 
-    
 
     drawAllSymbols(dots)
     drawSeasonsDots(dots)
 
-    console.log(dots[5].cy.baseVal.value)
+    
+
 
 
 
@@ -198,7 +268,7 @@ getData.then(episodes => {
     const zoom = d3.zoom()
         .scaleExtent([1.1, 5])
         //-10 -20 pour que les symbols ne sorte pas du svg
-        .translateExtent([[-10, -100], [width + margin.left +margin.right, height]])
+        .translateExtent([[-10, -100], [3400, height]])
         // ancienne valeur .translateExtent([[0, 0], [width + margin.left +margin.right, height]])
         .on("zoom", zoomed);
 
@@ -217,10 +287,12 @@ getData.then(episodes => {
         g.selectAll('.dot').attr("transform", e.transform);
         g.selectAll('.symbol').attr("transform", e.transform);
         
+    
 
         // Régénerer un axe à chaque fois qu'on zoom
-        let newX = e.transform.rescaleX(echelleEpisodes);
-        let newY = e.transform.rescaleY(echelleViewers);
+        var newX = e.transform.rescaleX(echelleEpisodes);
+        var newY = e.transform.rescaleY(echelleViewers);
+
 
 
         // Appeler le nouveau zoom
@@ -234,10 +306,17 @@ getData.then(episodes => {
 
 
     //TODO: Quand on zoom ça casse les coordonées
-    function zoomsSeason(dot) {
+    function zoomsSeason(dot, scale = 5) {
+
+
+
         d3.select('svg')
             .transition()
-            .call(zoom.scaleTo, 5, [echelleEpisodes(dot.cx.baseVal.value) - 10, echelleViewers(dot.cx.baseVal.value)])
+            .call(zoom.transform, d3.zoomIdentity.translate(width / 2, height / 2).scale(scale).translate(-dot.getAttribute('cx'), -dot.getAttribute('cy')))
+
+
+           
+
     }
 
     function resetZoom() {
@@ -246,51 +325,75 @@ getData.then(episodes => {
             .call(zoom.scaleTo, 1, [0, 0])
     }
 
-
+    insights.forEach(insight => {
+        //change la valeur de r pour les episodes avec insight
+        dots[insight.episode-1].setAttribute('r', 10)
+        //change l'épaisseur du contour du cercle
+        dots[insight.episode-1].setAttribute('stroke-width', 2)
+    });
     
     
-    document.querySelector('#s1').addEventListener('click', () => {
-        resetZoom()
-        zoomsSeason(dots[0])
-    })
+    //document.querySelector('#s1').addEventListener('click', () => {
+        //zoomsSeason(dots[5])
+         
+        //document.querySelector('#s1').classList.add('active')
+    //})
     document.querySelector('#s2').addEventListener('click', () => {
         resetZoom()
-        zoomsSeason(dots[10])
+        zoomsSeason(dots[15])
     })
     
     document.querySelector('#s3').addEventListener('click', () => {
-        zoomsSeason(dots[20])
+        zoomsSeason(dots[25])
     })
     
     document.querySelector('#s4').addEventListener('click', () => {
-        zoomsSeason(dots[0])
+        zoomsSeason(dots[35])
     })
     
     document.querySelector('#s5').addEventListener('click', () => {
-        zoomsSeason(dots[0])
+        zoomsSeason(dots[43])
     })
     
     document.querySelector('#s6').addEventListener('click', () => {
-        zoomsSeason(dots[0])
+        zoomsSeason(dots[57])
     })
     
     document.querySelector('#s7').addEventListener('click', () => {
-        zoomsSeason(dots[0])
+        zoomsSeason(dots[64])
     })
     
     document.querySelector('#s8').addEventListener('click', () => {
-        zoomsSeason(dots[0])
+        zoomsSeason(dots[70], 3.5)
     })
     
     document.querySelector('#btn-all').addEventListener('click', () => {
         resetZoom()
     })
 
-    //console log les coordonnées de la souris dans le svg quand on clique
-    svg.on('click', function (e) {
-        console.log(d3.pointer(e, this))
-    })
+    const selectionButton = document.querySelector('#selection-button')
 
+    selectionButton.addEventListener('click', (e) => {
+
+        if (e.target.classList == 'button-season') {
+
+            //si le bouton a déjà la class active on enlève la class active
+            
+            //récupère l'élément qui a la class active
+            const activeButton = document.querySelector('.active')
+            //enlève la class active
+            if (activeButton) {
+                activeButton.classList.remove('active')
+                e.target.classList.add('active')
+            }
+            else 
+            e.target.classList.add('active')
+            //ajoute la class active au bouton cliqué
+            
+        }
+    });
+
+    
 
 
     //Ajoute le zoom sur le SVG
@@ -304,7 +407,7 @@ const margin = {top: 10, right: 40, bottom: 30, left: 40}
 const width = 1400 - margin.left - margin.right;
 
 
-const height = 600 - margin.top - margin.bottom;
+const height = 500 - margin.top - margin.bottom;
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
@@ -312,5 +415,3 @@ window.onclick = function(event) {
       modal.style.display = "none";
     }
   }
-
-

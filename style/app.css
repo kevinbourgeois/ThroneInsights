@@ -1,6 +1,11 @@
 @import "./section.css";
 @import "./graph.css";
 @import "./modal.css";
+@import "./popup.css";
+@import "./filter.css";
+@import "./seasons.css";
+@import "./observations.css";
+@import "./fonts.css";
 
 body {
     height: 100%;
@@ -8,3 +13,7 @@ body {
     margin: 0;
 }
 
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
