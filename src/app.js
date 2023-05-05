@@ -7,6 +7,8 @@ import { drawAllSymbols, drawSeasonsDots } from "./symbols";
 //importe le fichier filter.js
 import {filter} from "./filter";
 
+const SELECTED_STROKE_WIDTH = 4;
+const REGULAR_STROKE_WIDTH = 2;
 
 
 const templatePopUp = document.querySelector('#template-pop-up')
@@ -17,14 +19,13 @@ const popUp = document.querySelector('#popup-episode');
 //read insights.json file
 const insights = require('../ressources/insights.json');
 
-
+const LINE_WIDTH = 1.5;
 
 /*
     Chargement des données tout ce qui suit s'éxécute
  */
 getData.then(episodes => {
 
-    console.log(episodes)
 
     //Dessin de la zone du futur graph
     var svg = select("#graph")
@@ -32,7 +33,13 @@ getData.then(episodes => {
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+        
+        
+        select('svg g').append('text').text('Episodes').style('fill ', 'white').attr('x', width/2).attr('y', height + 20).attr('id', 'xAxis-label')
+
+ 
+
 
 
     //Récupère les données et créé tableau avec le numéro de chaque épisodes
@@ -146,8 +153,8 @@ getData.then(episodes => {
         .datum(episodes)
         .attr('d', line)
         .attr('fill', 'none')
-        .attr('stroke', 'black')
-        .attr('stroke-width', 3)
+        .attr('stroke', 'white')
+        .attr('stroke-width', LINE_WIDTH)
         .attr("class", "line-graph")
 
 
@@ -163,6 +170,7 @@ getData.then(episodes => {
             .attr("fill", "blue")
             .attr("class", "dot")
             .attr("stroke", "black")
+            .attr("stroke-width", 3)
             .on("mouseover", (e, d, i) => {
                 popUp.style.display = "block";
                 popUp.style.position = "absolute";
@@ -268,7 +276,7 @@ getData.then(episodes => {
     const zoom = d3.zoom()
         .scaleExtent([1.1, 5])
         //-10 -20 pour que les symbols ne sorte pas du svg
-        .translateExtent([[-10, -100], [3400, height]])
+        .translateExtent([[-10, 0], [3400, height + 200]])
         // ancienne valeur .translateExtent([[0, 0], [width + margin.left +margin.right, height]])
         .on("zoom", zoomed);
 
@@ -329,7 +337,7 @@ getData.then(episodes => {
         //change la valeur de r pour les episodes avec insight
         dots[insight.episode-1].setAttribute('r', 10)
         //change l'épaisseur du contour du cercle
-        dots[insight.episode-1].setAttribute('stroke-width', 2)
+        dots[insight.episode-1].setAttribute('stroke-width', SELECTED_STROKE_WIDTH)
     });
     
     
@@ -407,7 +415,7 @@ const margin = {top: 10, right: 40, bottom: 30, left: 40}
 const width = 1400 - margin.left - margin.right;
 
 
-const height = 500 - margin.top - margin.bottom;
+const height = 750 - margin.top - margin.bottom;
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {

@@ -1,3 +1,16 @@
 .filter {
+    border-radius: 100%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer ;
+    background: none;
+    border-color: white;
+    
+}
+.filter.active {
+    background: white;
+}
 
+#filters-container {
+    display: none;
 }

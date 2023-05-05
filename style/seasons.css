@@ -62,7 +62,7 @@ transform : translateY(-0px);
     gap: 10px;
 }
 #btn-all {
-    background-color: #000000;
+    background: linear-gradient(90deg, #beb3b3 0%, #000000 100%);
 }
 #s1 {
     background: linear-gradient(90deg, #ff6961 0%, #000000 100%);

@@ -1,3 +1,4 @@
+const { filter } = require('d3-array');
 const runes = require('runes')
 
 const filtersContainer = document.querySelector("#filters-container");
@@ -5,19 +6,22 @@ console.log(document);
 
 let filters = [];
 filtersContainer.addEventListener("click", (e) => {
-    if (e.target.classList) {
+    
+  
+
+  if (e.target.classList.contains('filter')) {
       
       if (!filters.includes(e.target.value)) {
-        //e.target.classList.add("active");
+        e.target.classList.add("active");
         filters.push(e.target.value);
+
     
     } else {
-        //e.target.classList.remove("active");
+        e.target.classList.remove("active");
         //enlève le filtre de la liste
         filters = filters.filter((filter) => filter !== e.target.value);
     }
   }
-  console.log(filters);
   applyFilters(filters);
     
 });

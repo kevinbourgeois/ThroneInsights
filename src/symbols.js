@@ -5,7 +5,8 @@ import { select, selectAll } from "d3-selection";
 const popUp = document.querySelector('#popup-symbol');
 const popUpContent = popUp.querySelector('.popup-content');
 
-const SYMBOL_OPACITY = 0.5;
+const SYMBOL_OPACITY = 0.7;
+
 
 
 
@@ -58,7 +59,7 @@ for(let symbol in occurrences) {
     .attr('class', 'symbol')
     .attr('x', dot.cx.baseVal.value - 12)
     .attr('y', dot.cy.baseVal.value - (30 + marginTop))
-    .style('fill', 'black')
+    .style('fill', 'white')
     .text(emojiSymbol)
     .style('opacity', SYMBOL_OPACITY)
     .on('mouseover', (e) => {
@@ -93,6 +94,7 @@ for(let symbol in occurrences) {
     .on("mousemove", function(e){return select('.caption').style("top", (e.pageY-10)+"px").style("left",(e.pageX+10)+"px");})
     //sur le mouseout de la div, on supprime la div avec du texte
     .on('mouseout', (e) => {
+        
         select(e.target).style('opacity', SYMBOL_OPACITY);
         //select('.caption').remove();
         popUp.style.display = "none";
@@ -317,24 +319,70 @@ const drawAllSymbols = (dots) => {
         'caption': 'Daenerys burns the witch alive on Khal Drogo\'s funeral pyre'
     }]);
 
-    /*addSymbol(dots[getEpisodeNumber(11)], [{
+    addSymbol(dots[getEpisodeNumber(11)], [{
         'symbol': '👑',
-        'caption': 'Rob Stark is crowned king'
-    }]);*/
+        'caption': 'Rob Stark is crowned King of the North'
+    },
+    {
+        'symbol': '⭐',
+        'caption': 'Stannis Baratheon proclaims allegiance to the Lord of Light'
+    }]);
 
     addSymbol(dots[getEpisodeNumber(12)], [{
         'symbol': '🧟',
         'caption': 'Jon Snow discovers that Craster sacrifices his sons to the White Walkers'
+    },
+    {
+        'symbol': '🤝',
+        'caption': 'Theon Greyjoy is reunited with his family'
+    },
+    {
+        'symbol': '❤️',
+        'caption': 'Sam has a crush on Gilly'
     }]);
 
     addSymbol(dots[getEpisodeNumber(13)], [{
-        'symbol': '💔',
-        'caption': 'Theon Greyjoy betrays the Starks'
+        'symbol': '🤝',
+        'caption': 'Theon Greyjoy betrays the Starks to impress his father'
+    },
+    {
+        'symbol': '💀',
+        'caption': 'Yoren, Arya\'s smugler, is killed by the Lanisters'
+    },
+    {
+        'symbol': '⛓️',
+        'caption': 'Arya and Genry are captured by the Lanisters'
+    }]);
+
+    addSymbol(dots[getEpisodeNumber(14)], [{
+        'symbol': '⚔️',
+        'caption': 'Rob Stark wins another battle against the Lanisters at Oxcross'
+    },
+    {
+        'symbol': '❤️',
+        'caption': 'Rob Stark has a crush on Talisa Maegyr, a healer'
+    },
+    {
+        'symbol': '🩸',
+        'caption': 'Joffrey abuses Sansa Stark'
+    },
+    {
+        'symbol': '🩸',
+        'caption': 'Joffrey makes two prostitutes, given to him by Tyrion, beat each other up'
     }]);
 
     addSymbol(dots[getEpisodeNumber(15)], [{
         'symbol': '💀',
         'caption': 'Renly Baratheon is killed by Mellissandre shadow creature'
+    },
+    {
+        'symbol': '⛓️',
+        'caption': 'Arya frees Jaqen H\'ghar from a burning cage'
+    },
+    ,
+    {
+        'symbol': '⭐',
+        'caption': 'Tyrion discovers that Cersei is planning to use wildfire against Stannis Baratheon\'s army'
     }]);
 
     addSymbol(dots[getEpisodeNumber(16)], [{

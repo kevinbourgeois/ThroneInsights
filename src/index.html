@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
+<div id="main-content">
 <!-- Create a div where the graph will take place -->
 <div id="div_template"></div>
     <!-- The Modal -->
@@ -45,23 +46,76 @@
     <section id="title-section" href="description-section">
         <img src="img/logo.png">
         <h1>THRONES INSIGHTS</h1>
-        <p>Le contexte d’utilisation de ce jeu de données va permettre d’expliquer la tendance du nombre de
-            téléspectateurs à la première diffusion de chaque épisode de la série Game of Thrones.</p>
+        <p>The context of using this dataset will help explain the trend in the number of viewers at the first airing of each episode of the Game of Thrones series.</p>
     </section>
 
     <section id="description-section">
         <h2>GAME OF THRONES C'EST QUOI ?</h2>
         <p>
-            Game of Thrones est une série télévisée de fantasy médiévale basée sur les romans de George R.R. Martin.
-            Elle suit les luttes pour le pouvoir entre plusieurs familles nobles dans un monde fictif appelé Westeros.
-            La série est connue pour son intrigue complexe, ses scènes de violence graphique, ses rebondissements
-            inattendus et ses nombreux personnages mémorables. Au fil des saisons, les personnages doivent faire face à
-            des ennemis mortels, à des complots politiques et à des menaces surnaturelles, tout en luttant pour conquérir
-            le trône de fer et gouverner les sept royaumes de Westeros.
+            Game of Thrones is a medieval fantasy television series based on the novels by George R.R. Martin. It follows the power struggles between several noble families in a fictional world called Westeros. The series is known for its intricate plot, graphic violence, unexpected twists and turns and many memorable characters. Over the course of the seasons, the characters face deadly enemies, political plots and supernatural threats as they struggle to conquer the Iron Throne and rule the seven kingdoms of Westeros.
         </p>
     </section>
 
+    <section id="explanation-section">
+        <h2>How to properly read our graph</h2>
+        <div id="explanation">
+            <p>Through this graph you will be able to dive back into the history of the greatest series of all time. Scroll from episode to episode remembering the great moments of Game Of Thrones.</p>
+            <p>Each emoji represents an event in the episode that we considered important or a key event. To make it easier for you to use the graph that follows, below, in the section you are currently reading, there are captions that indicate what each emoji means.</p> 
+
+            <p>When you click on an episode with a normal ray, you will have access to the details of the episode with a summary to read.          
+            For the episodes with a bigger radius, in addition to the details, they contain an insight.</p>
+
+            <h4>What does the insight represent?</h4> 
+            <p>It is our personal opinion, after analysis, on the reasons for a strong decrease or increase of the audience. Whether it is directly related to the show itself or to events that are not related to it.</p>
+        </div>
+
+        <div id="captions-container">
+             <div id="episodes-meaning">
+                <div class="col-episode">
+                    <img id="selected-episode" src="./img/insights.png" alt="selected-episode">
+                    <p>Episode with an insight (bigger one)</p>
+                </div>
+
+                <div class="col-episode" >
+                    <img id="episode-not-selected" src="./img/no-insights.png" alt="episode-not-selected">
+                    <p>Episode without an insight (smaller one)</p>
+                </div>
+             </div>
+
+            <div id="emoji-meaning">
+                <div class="emoji-column">
+                    <ul>
+                        <li>💀 - Deaths</li>
+                        <li>🩸 - Injuries</li>
+                        <li>🐉 - Dragon related</li>
+                        <li>❤️ - Relationships</li>
+                    </ul>
+                </div>
+
+                <div class="emoji-column">
+                    <ul>
+                        <li>💍 - Weddings</li>
+                        <li>🧟 - White Walkers Related</li>
+                        <li>🤝 - Political acts</li>
+                        <li>⭐ - Magical events</li>
+                    </ul>
+                </div>
+
+                <div class="emoji-column">
+                    <ul>
+                        <li>⛓️ - Captures, imprisonments</li>
+                        <li>👑 - Crownings</li>
+                        <li>⚔️ - Wars</li>
+                        <li>🏃‍♀️ - Escapes</li>
+                    </ul>
+                </div>
+
+            </div> 
+        </div>
+    </section>
+
     <section id="graph-section">
+
         <div id="selection-button">
 
             <button class="button-season" id="btn-all">ALL</button>
@@ -77,19 +131,27 @@
         </div>
 
         <div id="filters-container">
-            <button class="filter" id="skull" value="💀">💀</button>
-            <button class="filter" id="wight" value="🧟">🧟</button>
-            <button class="filter" id="star" value="⭐">⭐</button>   
-            <button class="filter" id="heart" value="❤️">❤️</button>
-            <button class="filter" id="dragon" value="🐉">🐉</button>
+            <button class="filter" value="💀">💀</button>
+            <button class="filter" value="🧟">🧟</button>
+            <button class="filter" value="⭐">⭐</button>   
+            <button class="filter" value="❤️">❤️</button>
+            <button class="filter" value="🐉">🐉</button>
+            <button class="filter" value="🤝">🤝</button>
+            <button class="filter" value="💍">💍</button>
+            <button class="filter" value="👑">👑</button>
+            <button class="filter" value="⚔️">⚔️</button>
+            <button class="filter" value="🏃‍♀️">🏃‍♀️</button>
+            <button class="filter" value="⛓️">⛓️</button>
+            <button class="filter" value="🩸">🩸</button>
+            
         </div>
+
+        <h3 id="title-graph">Viewership (millions) at the first airing of Got Episodes</h3>
         
-        <div id="graph">
+        <div id="graph"></div>
 
-
-        </div>
     </section>
-
+    <!--
     <section id="observations-section">
         <h2>Observations</h2>
         <div class="observation-row">
@@ -134,7 +196,7 @@
             </div>   
         </div>
     </section>
-<!--
+-->
     
     <section id="bottom-section">
         <h3>Développeurs</h3>
@@ -164,7 +226,7 @@
    <div id="myDiv">
 
    </div>
--->
+
     <script src="app.js" type="module"> </script>
 
     <template id="template-pop-up">
@@ -175,7 +237,7 @@
             </div>
         </div>
     </template>
-
+</div>
 </body>
 
 </html>

@@ -1,13 +1,14 @@
-section {
+/* fais un dégradé sur l'intégralité */
+
+
+#title-section, #description-section, #bottom-section, #explanation-section {
     height: 100vh;
 }
 
 #title-section {
-    background-color: #1F3C4A;
     display: flex;
     flex-direction: column;
     align-items: center;
-
 }
 
 
@@ -19,20 +20,18 @@ section {
 
 
 
-#description-section {
-    background-color: #798E93;
-}
-
-
 
 
 #graph-section {
-    background-color: #DBD5C520;
+    padding-top: 20%;
+    color: white;
+    
 }
 
 #bottom-section {
-    background-color: #1F3C4A;
+    padding-top: 20%;
 }
+
 
 .dot:hover {
     r: 10px;

@@ -28,13 +28,18 @@
     text-align: center;
 }
 
-#description-section h2 {
+#description-section h2, #explanation-section h2 {
     margin: 0;
     color: white;
     text-align: center;
     font-family: "trajan-bold";
-    padding-top: 10%;
+
     font-size: 2.5em;
+} 
+
+
+#description-section h2 {
+    padding-top: 10%;
 }
 
 #description-section p {
@@ -56,16 +61,34 @@
     text-align: center;
 }
 
-#title-modal, #episode-modal, #variance-modal, #episode, #selection-button button {
+#title-modal, #episode-modal, #variance-modal, #episode, #selection-button button, #title-graph, .col-episode p, #explanation h4, #popup-symbol{
     font-family: 'trajan-bold';
 }
+
+#popup-symbol {
+    font-size: .8em;
+}
+#title-graph {
+    text-align: center;
+}
+
 
 #synopsis-modal {
     margin-bottom: 30px;
 }
 
-#synopsis-modal, #insight-modal, #variance, .tick text  {
+#synopsis-modal, #insight-modal, #variance, .tick text, #emoji-meaning, #explanation, #xAxis-label  {
     font-family: 'trajan';
+}
+
+#emoji-meaning, #explanation, .col-episode p{
+    color: white;
+}
+
+
+.tick text, #xAxis-label {
+    color: aliceblue;
+    font-size: 14px;
 }
 
 #insight-modal {
