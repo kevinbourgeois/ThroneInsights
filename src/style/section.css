@@ -34,6 +34,32 @@
 
 
 .dot:hover {
-    r: 10px;
+    
     transition: all 0.5s ease;
 }
+
+.dev img {
+    width: 200px;
+    height: 200px;
+    border-radius: 100%;
+}
+.dev ul {
+    padding: 0;
+}
+
+#bottom-section {
+    color: white;
+    font-family: trajan;
+
+}
+#dev-container {
+    display: flex;
+    justify-content: space-around;    
+}
+
+#bottom-section li {
+    list-style-type: none;
+    text-align: center;
+    
+}
+

@@ -4,12 +4,12 @@ import {scaleBand, scaleLinear} from "d3-scale";
 import * as d3 from 'd3'
 import { drawAllSymbols, drawSeasonsDots } from "./symbols";
 
+ 
 //importe le fichier filter.js
 import {filter} from "./filter";
 
 const SELECTED_STROKE_WIDTH = 4;
 const REGULAR_STROKE_WIDTH = 2;
-
 
 const templatePopUp = document.querySelector('#template-pop-up')
 // Get the modal
@@ -36,7 +36,7 @@ getData.then(episodes => {
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
         
         
-        select('svg g').append('text').text('Episodes').style('fill ', 'white').attr('x', width/2).attr('y', height + 20).attr('id', 'xAxis-label')
+        select('svg g').append('text').text('Episodes').style('fill', 'white').attr('x', width/2).attr('y', height + 20).attr('id', 'xAxis-label')
 
  
 
@@ -80,33 +80,7 @@ getData.then(episodes => {
     */
     axeXEpisodes.ticks(0)
     axeXEpisodes.tickSize(0)
-    //axeXEpisodes.tickFormat(d3.format("d"))
 
-
-    /*
-    axeXEpisodes.tickValues([1, 11, 21, 31, 41, 51, 61, 70, 73])
-
-
-    axeXEpisodes.tickFormat((d, i) => {
-        if (i === 0) {
-            return 'S1'
-        } else if (i === 1) {
-            return 'S2'
-        } else if (i === 2) {
-            return 'S3'
-        } else if (i === 3) {
-            return 'S4'
-        } else if (i === 4) {
-            return 'S5'
-        } else if (i === 5) {
-            return 'S6'
-        } else if (i === 6) {
-            return 'S7'
-        } else if (i === 7) {
-            return 'S8'
-        } 
-    })
-    */
 
     const g = svg.append('g')
 
@@ -156,6 +130,16 @@ getData.then(episodes => {
         .attr('stroke', 'white')
         .attr('stroke-width', LINE_WIDTH)
         .attr("class", "line-graph")
+
+
+    //donne moi la position en y du svg depuis le haut de la page html 
+    const svgPositionTop = svg.node().getBoundingClientRect().top + window.scrollY;
+    const svgPositionLeft = svg.node().getBoundingClientRect().left + window.scrollX;
+
+    const filterContainer = document.querySelector('#filters-container')  
+    filterContainer.style.top = svgPositionTop + 20 + 'px'
+    filterContainer.style.left = svgPositionLeft + 60 + 'px' 
+    filterContainer.style.display = 'block' 
 
 
 
@@ -210,11 +194,14 @@ getData.then(episodes => {
                 popUp.querySelector('#episode').textContent = ""
             })
             .on("click", (e, d, i) => {
+
+             
+
                 modal.style.display = "block";
                 modal.querySelector('#episode-modal').textContent = "S0" + d.season + " E0" + d.noEpisodeSeason
                 modal.querySelector('#title-modal').textContent =  d.title.toUpperCase()
                 modal.querySelector('#synopsis-modal').textContent = d.synopsis
-            
+                
 
                 if (d.noEpisodeOverall !== '1') {
                     var varianceViewers = d.viewers - episodes[d.noEpisodeOverall-2].viewers;
@@ -238,7 +225,7 @@ getData.then(episodes => {
 
 
                 const insightEpisode = insights.find(insight => insight.episode === d.noEpisodeOverall)
-                
+
                 if (insightEpisode) {
                     
 
@@ -258,6 +245,10 @@ getData.then(episodes => {
 
 )
 
+
+
+
+
     //récupère la node list tout les éléments avec la class dot et les stock dans une variable
     const dots = document.querySelectorAll('.dot') 
 
@@ -265,18 +256,13 @@ getData.then(episodes => {
     drawAllSymbols(dots)
     drawSeasonsDots(dots)
 
-    
-
-
-
-
     //TODO : Faire en sorte que l'on arrive sur une position déjà zoomée po
 
     //Création du zoom
     const zoom = d3.zoom()
         .scaleExtent([1.1, 5])
         //-10 -20 pour que les symbols ne sorte pas du svg
-        .translateExtent([[-10, 0], [3400, height + 200]])
+        .translateExtent([[-10, 0], [3400, height]])
         // ancienne valeur .translateExtent([[0, 0], [width + margin.left +margin.right, height]])
         .on("zoom", zoomed);
 
@@ -315,15 +301,9 @@ getData.then(episodes => {
 
     //TODO: Quand on zoom ça casse les coordonées
     function zoomsSeason(dot, scale = 5) {
-
-
-
         d3.select('svg')
             .transition()
-            .call(zoom.transform, d3.zoomIdentity.translate(width / 2, height / 2).scale(scale).translate(-dot.getAttribute('cx'), -dot.getAttribute('cy')))
-
-
-           
+            .call(zoom.transform, d3.zoomIdentity.translate(width / 2, height / 2 + 100).scale(scale).translate(-dot.getAttribute('cx'), -dot.getAttribute('cy')))
 
     }
 
@@ -340,46 +320,47 @@ getData.then(episodes => {
         dots[insight.episode-1].setAttribute('stroke-width', SELECTED_STROKE_WIDTH)
     });
     
+    document.querySelector('#selection-button').addEventListener('click', (e) => {
+        //donne moi la valeur de l'id de l'élément sur lequel j'ai cliqué
+        const id = e.target.id
+        
+        if (id !== 'selection-button') {
+ 
+            switch (id) {
+                case 'btn-all':
+                    zoomsSeason(dots[35], 1)
+                    break;
+                case 's1':
+                    zoomsSeason(dots[5], 2.5)
+                    break;
+                case 's2':
+                    zoomsSeason(dots[14], 2.5)
+                    break;
+                case 's3':
+                    zoomsSeason(dots[25], 2.5)
+                    break;
+                case 's4':
+                    zoomsSeason(dots[35], 2.5)
+                    break;
+                case 's5':
+                    zoomsSeason(dots[45], 2.0)
+                    break;
+                case 's6':
+                    zoomsSeason(dots[55], 2.0)
+                    break;
+                case 's7':
+                    zoomsSeason(dots[64], 2.0)
+                    break;
+                case 's8': 
+                    zoomsSeason(dots[70], 2.0)
+                    break;
+        }     
+    }
+});
     
-    //document.querySelector('#s1').addEventListener('click', () => {
-        //zoomsSeason(dots[5])
-         
-        //document.querySelector('#s1').classList.add('active')
-    //})
-    document.querySelector('#s2').addEventListener('click', () => {
-        resetZoom()
-        zoomsSeason(dots[15])
-    })
-    
-    document.querySelector('#s3').addEventListener('click', () => {
-        zoomsSeason(dots[25])
-    })
-    
-    document.querySelector('#s4').addEventListener('click', () => {
-        zoomsSeason(dots[35])
-    })
-    
-    document.querySelector('#s5').addEventListener('click', () => {
-        zoomsSeason(dots[43])
-    })
-    
-    document.querySelector('#s6').addEventListener('click', () => {
-        zoomsSeason(dots[57])
-    })
-    
-    document.querySelector('#s7').addEventListener('click', () => {
-        zoomsSeason(dots[64])
-    })
-    
-    document.querySelector('#s8').addEventListener('click', () => {
-        zoomsSeason(dots[70], 3.5)
-    })
-    
-    document.querySelector('#btn-all').addEventListener('click', () => {
-        resetZoom()
-    })
 
-    const selectionButton = document.querySelector('#selection-button')
+
+const selectionButton = document.querySelector('#selection-button')
 
     selectionButton.addEventListener('click', (e) => {
 
@@ -423,3 +404,5 @@ window.onclick = function(event) {
       modal.style.display = "none";
     }
   }
+
+  

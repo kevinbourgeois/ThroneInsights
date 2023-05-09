@@ -882,7 +882,7 @@ const drawAllSymbols = (dots) => {
     },
     {
         'symbol': '💀',
-        'caption': 'Beric Dondarrion is killed by the Night King'
+        'caption': 'Beric Dondarrion is killed by the army of the dead'
     },
     {
         'symbol': '💀',
