@@ -26,7 +26,7 @@ const LINE_WIDTH = 1.5;
  */
 getData.then(episodes => {
 
-
+    console.log(episodes)
     //Dessin de la zone du futur graph
     var svg = select("#graph")
         .append("svg")
