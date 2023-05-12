@@ -69,5 +69,8 @@ Figma : [lien](https://www.figma.com/file/mGcbNS4Ns4LC975HFXWnB0/ThronesInsights
   - Les données ont été utilisées dans le but de montrer, par rapport au site de critique, quelle est la meilleure saison de la série.
 
 -	RAJ KUMAR PANDEY | [lien](https://www.kaggle.com/code/rajkumarpandey02/games-of-thrones-eda)
-  - Les données ont été utilisées dans le but de montrer quel directeur à le plus diriger d’épisodes durant la série. 
+  - Les données ont été utilisées dans le but de montrer quel directeur à le plus diriger d’épisodes durant la série.
+
+ ## Lien pour le site 
+ Throne Insights : [lien](https://throneinsights.netlify.app/)
 
