@@ -251,7 +251,7 @@ getData.then(episodes => {
 
     //récupère la node list tout les éléments avec la class dot et les stock dans une variable
     const dots = document.querySelectorAll('.dot') 
-
+   
 
     drawAllSymbols(dots)
     drawSeasonsDots(dots)
@@ -280,6 +280,7 @@ getData.then(episodes => {
         g.select('.line-graph').attr("transform", e.transform);
         g.selectAll('.dot').attr("transform", e.transform);
         g.selectAll('.symbol').attr("transform", e.transform);
+        g.selectAll('.insight-info').attr("transform", e.transform);
         
     
 
@@ -318,6 +319,17 @@ getData.then(episodes => {
         dots[insight.episode-1].setAttribute('r', 10)
         //change l'épaisseur du contour du cercle
         dots[insight.episode-1].setAttribute('stroke-width', SELECTED_STROKE_WIDTH)
+
+        const bigDot = dots[insight.episode-1]
+        
+        g.append('text')
+            .attr('x', bigDot.getAttribute('cx') - 2)  
+            .attr('y', +bigDot.getAttribute('cy') + 25)
+            .attr('class', 'insight-info')
+            .style('fill', 'white')
+            .text('ℹ️')
+            
+        
     });
     
     document.querySelector('#selection-button').addEventListener('click', (e) => {
@@ -404,5 +416,3 @@ window.onclick = function(event) {
       modal.style.display = "none";
     }
   }
-
-  

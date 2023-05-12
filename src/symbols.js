@@ -102,54 +102,6 @@ for(let symbol in occurrences) {
     marginTop += 30;    
 }
 
-
-/*
-    for (const symbol of symbols) {
-
-
-    select('.main')
-        .append('text')
-        .attr('class', 'symbol')
-        .attr('x', dot.cx.baseVal.value - 12)
-        .attr('y', dot.cy.baseVal.value - (30 + marginTop))
-        .style('fill', 'black')
-        .text(symbol.symbol)
-        .style('opacity', 0.8)
-        //sur le hover l'élément symbol on lui met une opacité de 1
-
-        .on('mouseover', (e) => {
-            select('svg')
-                .append('text')
-                .attr('class', 'caption')
-                .attr('x', e.clientX)
-                .attr('y', e.clientY)
-                //si la div sort du cadre, on la met à l'intérieur
-                .attr('transform', () => {
-                    if (e.clientX > 1000) {
-                        return 'translate(-200, 0)';
-                    }                    //if (e.clientY > 500) {
-                    //    return 'translate(0, -100)';
-                    //}
-                    return 'translate(0, 0)';
-                })
-                .style('fill', 'black')
-                .text(symbol.caption)
-                
-        })
-        .on("mousemove", function(e){return select('.caption').style("top", (e.pageY-10)+"px").style("left",(e.pageX+10)+"px");})
-        //sur le mouseout de la div, on supprime la div avec du texte
-        .on('mouseout', () => {
-            select('.caption').remove  ();
-        })
-    
-        marginTop += 30;
-
-    }
-*/
-
-    
-
-
   
         
 }
