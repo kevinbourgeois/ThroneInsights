@@ -32,9 +32,6 @@ getData.then(episodes => {
         //Ajoute le nom de l'axe X
         select('svg g').append('text').text('Episodes').style('fill', 'white').attr('x', width/2).attr('y', height + 20).attr('id', 'xAxis-label')
 
-    //Récupère les données et créé tableau avec le numéro de chaque épisodes
-    const arrNoEpisode = episodes.map(episode => episode.noEpisodeOverall);
-
 
     // Définition des échelles
 
@@ -72,7 +69,7 @@ getData.then(episodes => {
 
     //Création de la zone de clip, ce qui va faire que le graph 
     //ne sortira pas en passant par dessus le html
-    g.append('defs')
+    svg.append('defs')
         .append('clipPath')
         .attr('id', 'clip')
         .append('rect')
@@ -297,17 +294,15 @@ getData.then(episodes => {
 
         const bigDot = dots[insight.episode-1]
         
-        g.append('text')
+        main.append('text')
             .attr('x', bigDot.getAttribute('cx') - 2)  
             .attr('y', +bigDot.getAttribute('cy') + 25)
             .attr('class', 'insight-info')
             .style('fill', 'white')
             .text('ℹ️')
-            
-        
     });
     
-    
+
     document.querySelector('#selection-button').addEventListener('click', (e) => {
         //donne moi la valeur de l'id de l'élément sur lequel j'ai cliqué
         const id = e.target.id
