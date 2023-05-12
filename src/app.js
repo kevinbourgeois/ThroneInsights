@@ -1,32 +1,26 @@
 import {getData} from "./api";
 import {select} from "d3-selection";
-import {scaleBand, scaleLinear} from "d3-scale";
+import {scaleLinear} from "d3-scale";
 import * as d3 from 'd3'
 import { drawAllSymbols, drawSeasonsDots } from "./symbols";
-
- 
-//importe le fichier filter.js
-import {filter} from "./filter";
+require('./filter.js');
 
 const SELECTED_STROKE_WIDTH = 4;
-const REGULAR_STROKE_WIDTH = 2;
-
-const templatePopUp = document.querySelector('#template-pop-up')
-// Get the modal
-const modal = document.getElementById("myModal");
-
-const popUp = document.querySelector('#popup-episode');
-//read insights.json file
-const insights = require('../ressources/insights.json');
-
 const LINE_WIDTH = 1.5;
 
+const modal = document.getElementById("myModal");
+const popUp = document.querySelector('#popup-episode');
+
+
+const insights = require('../ressources/insights.json');
+
 /*
-    Chargement des données tout ce qui suit s'éxécute
- */
+    Une fois que les données sont récupérées, on peut commencer à les traiter
+
+    episodes est un tableau d'objets, chaque objet représente un épisode
+*/
 getData.then(episodes => {
 
-    console.log(episodes)
     //Dessin de la zone du futur graph
     var svg = select("#graph")
         .append("svg")
@@ -35,12 +29,8 @@ getData.then(episodes => {
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
         
-        
+        //Ajoute le nom de l'axe X
         select('svg g').append('text').text('Episodes').style('fill', 'white').attr('x', width/2).attr('y', height + 20).attr('id', 'xAxis-label')
-
- 
-
-
 
     //Récupère les données et créé tableau avec le numéro de chaque épisodes
     const arrNoEpisode = episodes.map(episode => episode.noEpisodeOverall);
@@ -60,19 +50,15 @@ getData.then(episodes => {
         .range([height, 0])
         .clamp(true)
 
-
     //création des deux l'échelles
     let axeXEpisodes = d3.axisBottom(echelleEpisodes)
     let axeYViewers = d3.axisLeft(echelleViewers).tickSize(-innerWidth)
 
-    
     /*
         Configuration de la graduation de l'axe Y
     */
     axeYViewers.tickFormat(d => d + 'm')
-    
     axeYViewers.ticks(5)
-    
     axeYViewers.tickPadding(10)
 
     /*
@@ -84,7 +70,8 @@ getData.then(episodes => {
 
     const g = svg.append('g')
 
-    //Création de la zone de clip, ce qui va faire que le graph ne sortira pas en passant par dessus le html
+    //Création de la zone de clip, ce qui va faire que le graph 
+    //ne sortira pas en passant par dessus le html
     g.append('defs')
         .append('clipPath')
         .attr('id', 'clip')
@@ -156,16 +143,16 @@ getData.then(episodes => {
             .attr("stroke", "black")
             .attr("stroke-width", 3)
             .on("mouseover", (e, d, i) => {
+                //Affiche le pop-up
                 popUp.style.display = "block";
                 popUp.style.position = "absolute";
                 popUp.style.top = e.layerY - 30 + "px";
                 popUp.style.left = e.clientX + 10 + "px";
 
-
+                //Affiche les données dans le pop-up
                 if (d.noEpisodeOverall !== '1') {
                 var varianceViewers = d.viewers - episodes[d.noEpisodeOverall-2].viewers;
                 const divVariance =  document.querySelector('#variance')
-
 
                 let arrowHTML = "";
                 if (varianceViewers > 0) {
@@ -189,14 +176,13 @@ getData.then(episodes => {
 
             })
             .on("mouseout", () => {
+                //Cache le pop-up
                 popUp.style.display = "none";
                 popUp.querySelector('#variance').textContent = ""
                 popUp.querySelector('#episode').textContent = ""
             })
             .on("click", (e, d, i) => {
-
-             
-
+                //Affiche le modal
                 modal.style.display = "block";
                 modal.querySelector('#episode-modal').textContent = "S0" + d.season + " E0" + d.noEpisodeSeason
                 modal.querySelector('#title-modal').textContent =  d.title.toUpperCase()
@@ -245,18 +231,12 @@ getData.then(episodes => {
 
 )
 
-
-
-
-
     //récupère la node list tout les éléments avec la class dot et les stock dans une variable
     const dots = document.querySelectorAll('.dot') 
    
-
+    //Dessine les symboles sur les points du graph
     drawAllSymbols(dots)
     drawSeasonsDots(dots)
-
-    //TODO : Faire en sorte que l'on arrive sur une position déjà zoomée po
 
     //Création du zoom
     const zoom = d3.zoom()
@@ -296,10 +276,6 @@ getData.then(episodes => {
 
     }
 
-
-
-
-
     //TODO: Quand on zoom ça casse les coordonées
     function zoomsSeason(dot, scale = 5) {
         d3.select('svg')
@@ -315,9 +291,8 @@ getData.then(episodes => {
     }
 
     insights.forEach(insight => {
-        //change la valeur de r pour les episodes avec insight
+
         dots[insight.episode-1].setAttribute('r', 10)
-        //change l'épaisseur du contour du cercle
         dots[insight.episode-1].setAttribute('stroke-width', SELECTED_STROKE_WIDTH)
 
         const bigDot = dots[insight.episode-1]
@@ -331,6 +306,7 @@ getData.then(episodes => {
             
         
     });
+    
     
     document.querySelector('#selection-button').addEventListener('click', (e) => {
         //donne moi la valeur de l'id de l'élément sur lequel j'ai cliqué
@@ -375,7 +351,6 @@ getData.then(episodes => {
 const selectionButton = document.querySelector('#selection-button')
 
     selectionButton.addEventListener('click', (e) => {
-
         if (e.target.classList == 'button-season') {
 
             //si le bouton a déjà la class active on enlève la class active
