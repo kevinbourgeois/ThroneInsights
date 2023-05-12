@@ -2,7 +2,7 @@ const { filter } = require('d3-array');
 const runes = require('runes')
 
 const filtersContainer = document.querySelector("#filters-container");
-console.log(document);
+
 
 let filters = [];
 filtersContainer.addEventListener("click", (e) => {

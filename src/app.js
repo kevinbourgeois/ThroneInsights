@@ -2,7 +2,11 @@ import {getData} from "./api";
 import {select} from "d3-selection";
 import {scaleLinear} from "d3-scale";
 import * as d3 from 'd3'
+
+//règle le problème de import * pour la product
 console.log(d3)
+
+
 import { drawAllSymbols, drawSeasonsDots } from "./symbols";
 require('./filter.js');
 
