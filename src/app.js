@@ -12,7 +12,6 @@ const modal = document.getElementById("myModal");
 const popUp = document.querySelector('#popup-episode');
 
 
-const insights = require('../ressources/insights.json');
 
 /*
     Une fois que les données sont récupérées, on peut commencer à les traiter
@@ -20,7 +19,6 @@ const insights = require('../ressources/insights.json');
     episodes est un tableau d'objets, chaque objet représente un épisode
 */
 getData.then(episodes => {
-
     //Dessin de la zone du futur graph
     var svg = select("#graph")
         .append("svg")
@@ -74,7 +72,6 @@ getData.then(episodes => {
         .attr('id', 'clip')
         .append('rect')
         .attr('x', 0)
-        .attr('y', 0)
         .attr('width', 1400)
         .attr('height', height);
 
