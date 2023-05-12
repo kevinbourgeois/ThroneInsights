@@ -2,6 +2,7 @@ import {getData} from "./api";
 import {select} from "d3-selection";
 import {scaleLinear} from "d3-scale";
 import * as d3 from 'd3'
+console.log(d3)
 import { drawAllSymbols, drawSeasonsDots } from "./symbols";
 require('./filter.js');
 
@@ -12,6 +13,7 @@ const modal = document.getElementById("myModal");
 const popUp = document.querySelector('#popup-episode');
 
 
+import insights from "../ressources/insights.json";
 
 /*
     Une fois que les données sont récupérées, on peut commencer à les traiter
@@ -19,6 +21,7 @@ const popUp = document.querySelector('#popup-episode');
     episodes est un tableau d'objets, chaque objet représente un épisode
 */
 getData.then(episodes => {
+
     //Dessin de la zone du futur graph
     var svg = select("#graph")
         .append("svg")
